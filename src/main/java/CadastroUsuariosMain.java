@@ -31,6 +31,17 @@ public class CadastroUsuariosMain {
             if (scanner.next().equals("N")) {
                 teste = "N";
             }
+            System.out.print("Deseja excluir algum usuário ? [S/N]");
+            if (scanner.next().equals("S")){
+                System.out.println("Qual ID você deseja deletar: ");
+                int deletarId = scanner.nextInt();
+                boolean deletado = service.delete(deletarId);
+                if (deletado == ){
+                    System.out.println("O ID Selecionado: " + deletarId + " foi exluido com sucesso.");
+                }else {
+                    System.out.println("Esse ID: " + deletarId + " não pode ser excluido ou não existe !!!");
+                }
+            }
             System.out.println("Deseja ver a lista de usuários cadastrados? [S/N]");
             if (scanner.next().equals("S")) {
                 List<Usuario> usuariosList = service.findAll();

@@ -35,4 +35,23 @@ public class UsuarioService {
             }
         }
     }
+
+    public boolean delete(int id){
+        boolean find = false;
+        for(int i = 0; i < usuarios.size(); i++){
+            if(id == usuarios.get(i).getId()){
+                find = true;
+                usuarios.remove(i);
+                break;
+            }
+        }
+       return find;
+    }
+
+
+
+
+
+
+
 }
