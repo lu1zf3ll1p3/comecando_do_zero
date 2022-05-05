@@ -31,12 +31,29 @@ public class CadastroUsuariosMain {
             if (scanner.next().equals("N")) {
                 teste = "N";
             }
+
+            System.out.print("Deseja Atualizar algum usuário ? [S/N]");
+            if (scanner.next().equals("S")) {
+                System.out.println("Qual item da lista acima você deseja Atualizar: ");
+                String atualizaItem = scanner.next();
+                switch (atualizaItem){
+                    case nome:{
+                        System.out.println("Digite o novo nome: ");
+                        scanner.next();
+
+                    }
+
+                }
+
+            }
+
+
             System.out.print("Deseja excluir algum usuário ? [S/N]");
             if (scanner.next().equals("S")){
                 System.out.println("Qual ID você deseja deletar: ");
                 int deletarId = scanner.nextInt();
                 boolean deletado = service.delete(deletarId);
-                if (deletado == ){
+                if (deletado){
                     System.out.println("O ID Selecionado: " + deletarId + " foi exluido com sucesso.");
                 }else {
                     System.out.println("Esse ID: " + deletarId + " não pode ser excluido ou não existe !!!");

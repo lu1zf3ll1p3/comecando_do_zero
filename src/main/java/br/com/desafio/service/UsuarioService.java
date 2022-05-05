@@ -1,12 +1,16 @@
 package br.com.desafio.service;
 
 import br.com.desafio.model.entity.Usuario;
+import br.com.desafio.model.entity.UsuarioAtualiza;
+import br.com.desafio.model.enums.Sexo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UsuarioService {
-
+    UsuarioAtualiza atualizarUsuario = new UsuarioAtualiza();
     private List<Usuario> usuarios;
 
     public Usuario save(Usuario usuario) {
@@ -17,6 +21,7 @@ public class UsuarioService {
         usuarios.add(usuario);
         return usuario;
     }
+
 
     public List<Usuario> findAll() {
         return this.usuarios;
@@ -36,22 +41,30 @@ public class UsuarioService {
         }
     }
 
-    public boolean delete(int id){
+    public boolean delete(int id) {
         boolean find = false;
-        for(int i = 0; i < usuarios.size(); i++){
-            if(id == usuarios.get(i).getId()){
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (id == usuarios.get(i).getId()) {
                 find = true;
                 usuarios.remove(i);
                 break;
             }
         }
-       return find;
+        return find;
     }
 
 
-
-
-
-
-
+    public void userUpdate(int id, String nomeAtualizado, String cpfAtualizado, String emailAtualizado, LocalDate dataNascimentoAtualizado, Sexo sexoAtualizado) {
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (!Objects.equals(usuarios.get(i).getNome(), atualizarUsuario.getNome())) {
+                usuarios.get(i).setNome(atualizarUsuario.setNome(nomeAtualizado));
+                usuarios.get(i).setCpf(atualizarUsuario.setNome(cpfAtualizado));
+                usuarios.get(i).setEmail(atualizarUsuario.setEmail(emailAtualizado));
+                usuarios.get(i).setEmail(atualizarUsuario.setEmail(emailAtualizado));
+                usuarios.get(i).setDataNascimento(atualizarUsuario.setDataNascimento(dataNascimentoAtualizado));
+                usuarios.get(i).setSexo(atualizarUsuario.setSexo(sexoAtualizado));
+            }
+        }
+    }
 }
+
