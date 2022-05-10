@@ -54,14 +54,17 @@ public class UsuarioService {
     }
 
 
-    public void userUpdate(int id, String nomeAtualizado, String cpfAtualizado, String emailAtualizado, LocalDate dataNascimentoAtualizado, Sexo sexoAtualizado) {
+    public void userUpdate(String nomeAtualizado, String cpfAtualizado, String emailAtualizado, LocalDate dataNascimentoAtualizado, Sexo sexoAtualizado) {
         for (int i = 0; i < usuarios.size(); i++) {
             if (!Objects.equals(usuarios.get(i).getNome(), atualizarUsuario.getNome())) {
                 usuarios.get(i).setNome(atualizarUsuario.setNome(nomeAtualizado));
-                usuarios.get(i).setCpf(atualizarUsuario.setNome(cpfAtualizado));
+            }else if(!Objects.equals(usuarios.get(i).getCpf(), atualizarUsuario.getCpf())){
+                usuarios.get(i).setCpf(atualizarUsuario.setCpf(cpfAtualizado));
+            }else if(!Objects.equals(usuarios.get(i).getEmail(), atualizarUsuario.getEmail())){
                 usuarios.get(i).setEmail(atualizarUsuario.setEmail(emailAtualizado));
-                usuarios.get(i).setEmail(atualizarUsuario.setEmail(emailAtualizado));
+            }else if (!Objects.equals(usuarios.get(i).getDataNascimento(), atualizarUsuario.getDataNascimento())){
                 usuarios.get(i).setDataNascimento(atualizarUsuario.setDataNascimento(dataNascimentoAtualizado));
+            }else{
                 usuarios.get(i).setSexo(atualizarUsuario.setSexo(sexoAtualizado));
             }
         }
