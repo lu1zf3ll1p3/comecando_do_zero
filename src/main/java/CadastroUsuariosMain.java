@@ -12,6 +12,7 @@ public class CadastroUsuariosMain {
     public static void main(String[] args) {
         String teste = "S";
         UsuarioService service = new UsuarioService();
+
         while (teste == "S") {
             Scanner scanner = new Scanner(System.in);
             System.out.println("#####################Sistema de Cadastro de Usuários#####################");
