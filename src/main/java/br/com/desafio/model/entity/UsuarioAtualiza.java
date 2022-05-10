@@ -1,4 +1,4 @@
-package br.com.desafio.model.entity;
+/*package br.com.desafio.model.entity;
 
 import br.com.desafio.model.enums.Sexo;
 
@@ -90,3 +90,4 @@ public class UsuarioAtualiza {
                 '}';
     }
 }
+*/

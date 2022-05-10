@@ -54,7 +54,7 @@ public class UsuarioService {
     }
 
 
-    public void userUpdate(String nomeAtualizado, String cpfAtualizado, String emailAtualizado, LocalDate dataNascimentoAtualizado, Sexo sexoAtualizado) {
+    /*public void userUpdate(String nomeAtualizado, String cpfAtualizado, String emailAtualizado, LocalDate dataNascimentoAtualizado, Sexo sexoAtualizado) {
         for (int i = 0; i < usuarios.size(); i++) {
             if (!Objects.equals(usuarios.get(i).getNome(), atualizarUsuario.getNome())) {
                 usuarios.get(i).setNome(atualizarUsuario.setNome(nomeAtualizado));
@@ -68,6 +68,6 @@ public class UsuarioService {
                 usuarios.get(i).setSexo(atualizarUsuario.setSexo(sexoAtualizado));
             }
         }
-    }
+    }*/
 }
 
