@@ -36,7 +36,6 @@ public class CadastroUsuariosMain {
             if (scanner.next().equals("S")) {
                 System.out.println("Qual item da lista acima você deseja Atualizar: ");
                 String atualizaItem = scanner.next();
-<<<<<<< HEAD
                 switch (atualizaItem) {
                     case nome: {
                         System.out.println("Digite o novo nome: ");
@@ -72,13 +71,6 @@ public class CadastroUsuariosMain {
                         usuario.setSexo(sexo);
                         System.out.print("Este é o sexo escolhido: " + sexo);
                         break;
-=======
-                switch (atualizaItem){
-                    case novoNome :{
-                        System.out.println("Digite o novo nome: ");
-
-
->>>>>>> edc9eae46ceb88acec67f7dec5df652b970d98a2
                     }
 
                 }
