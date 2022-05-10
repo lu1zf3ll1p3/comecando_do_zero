@@ -37,9 +37,9 @@ public class CadastroUsuariosMain {
                 System.out.println("Qual item da lista acima você deseja Atualizar: ");
                 String atualizaItem = scanner.next();
                 switch (atualizaItem){
-                    case nome:{
+                    case novoNome :{
                         System.out.println("Digite o novo nome: ");
-                        scanner.next();
+
 
                     }
 

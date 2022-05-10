@@ -46,8 +46,9 @@ public class UsuarioAtualiza {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public String setCpf(String cpf) {
         this.cpf = cpf;
+        return cpf;
     }
 
     public String getEmail() {
