@@ -9,9 +9,10 @@ import java.util.Scanner;
 
 public class CadastroUsuariosMain {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         String teste = "S";
         UsuarioService service = new UsuarioService();
+
         while (teste == "S") {
             Scanner scanner = new Scanner(System.in);
             System.out.println("#####################Sistema de Cadastro de Usuários#####################");
@@ -36,11 +37,41 @@ public class CadastroUsuariosMain {
             if (scanner.next().equals("S")) {
                 System.out.println("Qual item da lista acima você deseja Atualizar: ");
                 String atualizaItem = scanner.next();
-                switch (atualizaItem){
-                    case nome:{
+                switch (atualizaItem) {
+                    case nome: {
                         System.out.println("Digite o novo nome: ");
-                        scanner.next();
-
+                        nome = scanner.next();
+                        usuario.setNome(nome);
+                        System.out.print("Este é o nome escolhido: " + nome);
+                        break;
+                    }
+                    case cpf: {
+                        System.out.println("Digite o novo cpf: ");
+                        cpf = scanner.next();
+                        usuario.setCpf(cpf);
+                        System.out.print("Este é o cpf escolhido: " + cpf);
+                        break;
+                    }
+                    case email: {
+                        System.out.println("Digite o novo email: ");
+                        email = scanner.next();
+                        usuario.setEmail(email);
+                        System.out.print("Este é o email escolhido: " + email);
+                        break;
+                    }
+                    case dataNascimento: {
+                        System.out.println("Digite o nova data do nascimento: ");
+                        dataNascimento = LocalDate.parse(scanner.next());
+                        usuario.setDataNascimento(LocalDate.parse(String.valueOf(dataNascimento)));
+                        System.out.print("Esta é a nova data do nascimento escolhido: " + dataNascimento);
+                        break;
+                    }
+                    case sexo: {
+                        System.out.println("Digite o novo sexo: ");
+                        sexo = Sexo.valueOf(scanner.next());
+                        usuario.setSexo(sexo);
+                        System.out.print("Este é o sexo escolhido: " + sexo);
+                        break;
                     }
 
                 }
@@ -49,20 +80,20 @@ public class CadastroUsuariosMain {
 
 
             System.out.print("Deseja excluir algum usuário ? [S/N]");
-            if (scanner.next().equals("S")){
+            if (scanner.next().equals("S")) {
                 System.out.println("Qual ID você deseja deletar: ");
                 int deletarId = scanner.nextInt();
                 boolean deletado = service.delete(deletarId);
-                if (deletado){
+                if (deletado) {
                     System.out.println("O ID Selecionado: " + deletarId + " foi exluido com sucesso.");
-                }else {
+                } else {
                     System.out.println("Esse ID: " + deletarId + " não pode ser excluido ou não existe !!!");
                 }
             }
             System.out.println("Deseja ver a lista de usuários cadastrados? [S/N]");
             if (scanner.next().equals("S")) {
                 List<Usuario> usuariosList = service.findAll();
-                for (int i= 0; i < usuariosList.size(); i++) {
+                for (int i = 0; i < usuariosList.size(); i++) {
                     System.out.println(usuariosList.get(i).toString());
                 }
             }
