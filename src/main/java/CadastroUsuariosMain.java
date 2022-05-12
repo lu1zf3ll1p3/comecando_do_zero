@@ -32,11 +32,14 @@ public class CadastroUsuariosMain {
                 teste = "N";
             }
 
-            System.out.print("Deseja Atualizar algum usuário ? [S/N]");
+            System.out.println("Deseja Atualizar algum usuário ? [S/N]");
             if (scanner.next().equals("S")) {
-
-                System.out.println("Qual item da lista acima você deseja Atualizar: ");
-                String atualizaItem = scanner.next();
+                System.out.println("Digite o ID que deseja atualizar: ");
+                int id = scanner.nextInt();
+                id = service.update(id);
+                if (id == id) {
+                    System.out.println("Qual item da lista acima você deseja Atualizar: ");
+                    String atualizaItem = scanner.next();
                     switch (atualizaItem) {
                         case "nome":
                             System.out.println("Digite o novo nome: ");
@@ -78,9 +81,9 @@ public class CadastroUsuariosMain {
                     }
 
                 }
+            }
 
-
-            System.out.print("Deseja excluir algum usuário ? [S/N]");
+            System.out.println("Deseja excluir algum usuário ? [S/N]");
             if (scanner.next().equals("S")) {
                 System.out.println("Qual ID você deseja deletar: ");
                 int deletarId = scanner.nextInt();

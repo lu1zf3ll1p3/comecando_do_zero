@@ -47,5 +47,16 @@ public class UsuarioService {
         }
         return find;
     }
+
+
+    public int update(int id) {
+        for (int i = 0; i < usuarios.size(); i++) {
+            if(usuarios.contains(id)){
+                usuarios.listIterator(id);
+            }
+        }
+        return id;
+    }
+
 }
 
