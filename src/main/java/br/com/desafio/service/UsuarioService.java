@@ -29,7 +29,7 @@ public class UsuarioService {
             usuario.setId(id);
         } else {
             if (usuarios.get(usuarios.size() - 1) != null) {
-                id = usuarios.get(usuarios.size() - 1).getId();
+                id = usuarios.get(usuarios.size() - 1).getId(id);
                 id++;
                 usuario.setId(id);
             }
@@ -39,7 +39,7 @@ public class UsuarioService {
     public boolean delete(int id) {
         boolean find = false;
         for (int i = 0; i < usuarios.size(); i++) {
-            if (id == usuarios.get(i).getId()) {
+            if (id == usuarios.get(i).getId(id)) {
                 find = true;
                 usuarios.remove(i);
                 break;
@@ -52,10 +52,10 @@ public class UsuarioService {
     public int update(int id) {
         for (int i = 0; i < usuarios.size(); i++) {
             if(usuarios.contains(id)){
-                usuarios.listIterator(id);
+                usuarios.get(i).getId(id);
             }
         }
-        return id;
+            return id;
     }
 
 }

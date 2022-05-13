@@ -36,51 +36,53 @@ public class CadastroUsuariosMain {
             if (scanner.next().equals("S")) {
                 System.out.println("Digite o ID que deseja atualizar: ");
                 int id = scanner.nextInt();
-                id = service.update(id);
-                if (id == id) {
-                    System.out.println("Qual item da lista acima você deseja Atualizar: ");
-                    String atualizaItem = scanner.next();
-                    switch (atualizaItem) {
-                        case "nome":
-                            System.out.println("Digite o novo nome: ");
-                            nome = scanner.next();
-                            usuario.setNome(nome);
-                            System.out.println("Este é o nome escolhido: " + nome);
-                            break;
+                int updateId = service.update(id);
+                    if(updateId == id) {
+                        System.out.println("Qual item da lista acima você deseja Atualizar: ");
+                        String atualizaInfo = scanner.next();
+                        switch (atualizaInfo) {
+                            case "nome":
+                                System.out.println("Digite o novo nome: ");
+                                nome = scanner.next();
+                                usuario.setNome(nome);
+                                System.out.println("Este é o nome escolhido: " + nome);
+                                break;
 
-                        case "cpf":
-                            System.out.println("Digite o novo cpf: ");
-                            cpf = scanner.next();
-                            usuario.setCpf(cpf);
-                            System.out.println("Este é o cpf escolhido: " + cpf);
-                            break;
+                            case "cpf":
+                                System.out.println("Digite o novo cpf: ");
+                                cpf = scanner.next();
+                                usuario.setCpf(cpf);
+                                System.out.println("Este é o cpf escolhido: " + cpf);
+                                break;
 
-                        case "email":
-                            System.out.println("Digite o novo email: ");
-                            email = scanner.next();
-                            usuario.setEmail(email);
-                            System.out.println("Este é o email escolhido: " + email);
-                            break;
+                            case "email":
+                                System.out.println("Digite o novo email: ");
+                                email = scanner.next();
+                                usuario.setEmail(email);
+                                System.out.println("Este é o email escolhido: " + email);
+                                break;
 
-                        case "dataNascimento":
-                            System.out.println("Digite o nova data do nascimento: ");
-                            dataNascimento = LocalDate.parse(scanner.next());
-                            usuario.setDataNascimento(LocalDate.parse(String.valueOf(dataNascimento)));
-                            System.out.println("Esta é a nova data do nascimento escolhido: " + dataNascimento);
-                            break;
+                            case "dataNascimento":
+                                System.out.println("Digite o nova data do nascimento: ");
+                                dataNascimento = LocalDate.parse(scanner.next());
+                                usuario.setDataNascimento(LocalDate.parse(String.valueOf(dataNascimento)));
+                                System.out.println("Esta é a nova data do nascimento escolhido: " + dataNascimento);
+                                break;
 
-                        case "sexo":
-                            System.out.println("Digite o novo sexo: ");
-                            sexo = Sexo.valueOf(scanner.next());
-                            usuario.setSexo(sexo);
-                            System.out.println("Este é o sexo escolhido: " + sexo);
-                            break;
+                            case "sexo":
+                                System.out.println("Digite o novo sexo: ");
+                                sexo = Sexo.valueOf(scanner.next());
+                                usuario.setSexo(sexo);
+                                System.out.println("Este é o sexo escolhido: " + sexo);
+                                break;
 
-                        default:
-                            System.out.println("Não foi possivel realizar a sua auteração, verifique se esta correta o iten selecionado.");
+                            default:
+                                System.out.println("Não foi possível realizar a sua alteração, verifique se está correta a informação a ser substituída.");
+                        }
+                    }else{
+                        System.out.print("Id: " + id + " não encontrado.");
                     }
 
-                }
             }
 
             System.out.println("Deseja excluir algum usuário ? [S/N]");
