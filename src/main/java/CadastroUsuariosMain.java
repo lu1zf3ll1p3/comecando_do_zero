@@ -32,11 +32,14 @@ public class CadastroUsuariosMain {
                 continua = "N";
             }
 
+
             System.out.println("Deseja Atualizar algum usuário ? [S/N]");
             if (scanner.next().equals("S")) {
-                System.out.println("Digite o ID que deseja atualizar: ");
-                int id = scanner.nextInt();
-                 Usuario updateId = service.update(id);
+                String continuar = "S";
+                while (continuar == "S") {
+                    System.out.println("Digite o ID que deseja atualizar: ");
+                    int id = scanner.nextInt();
+                    Usuario updateId = service.update(id);
                     if (updateId != null) {
                         usuario = updateId;
                         System.out.println("Qual item da lista acima você deseja Atualizar: ");
@@ -80,28 +83,35 @@ public class CadastroUsuariosMain {
                             default:
                                 System.out.println("Não foi possível realizar a sua alteração, verifique se está correta a informação a ser substituída.");
                         }
-                    }else{
+                    } else {
                         System.out.print("Id: " + id + " não encontrado.");
                     }
-
-            }
-
-            System.out.println("Deseja excluir algum usuário ? [S/N]");
-            if (scanner.next().equals("S")) {
-                System.out.println("Qual ID você deseja deletar: ");
-                int deletarId = scanner.nextInt();
-                boolean deletado = service.delete(deletarId);
-                if (deletado) {
-                    System.out.println("O ID Selecionado: " + deletarId + " foi exluido com sucesso.");
-                } else {
-                    System.out.println("Esse ID: " + deletarId + " não pode ser excluido ou não existe !!!");
+                    System.out.println("Deseja realizar mais alguma atualização ? [S/N]");
+                    if (scanner.next().equals("N")) {
+                        continuar = "N";
+                    }
                 }
-            }
-            System.out.println("Deseja ver a lista de usuários cadastrados? [S/N]");
-            if (scanner.next().equals("S")) {
-                List<Usuario> usuariosList = service.findAll();
-                for (int i = 0; i < usuariosList.size(); i++) {
-                    System.out.println(usuariosList.get(i).toString());
+
+
+                System.out.println("Deseja excluir algum usuário ? [S/N]");
+                if (scanner.next().equals("S")) {
+                    System.out.println("Qual ID você deseja deletar: ");
+                    int deletarId = scanner.nextInt();
+                    boolean deletado = service.delete(deletarId);
+                    if (deletado) {
+                        System.out.println("O ID Selecionado: " + deletarId + " foi exluido com sucesso.");
+                    } else {
+                        System.out.println("Esse ID: " + deletarId + " não pode ser excluido ou não existe !!!");
+                    }
+                }
+
+
+                System.out.println("Deseja ver a lista de usuários cadastrados? [S/N]");
+                if (scanner.next().equals("S")) {
+                    List<Usuario> usuariosList = service.findAll();
+                    for (int i = 0; i < usuariosList.size(); i++) {
+                        System.out.println(usuariosList.get(i).toString());
+                    }
                 }
             }
         }
