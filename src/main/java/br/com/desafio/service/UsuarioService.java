@@ -49,14 +49,15 @@ public class UsuarioService {
     }
 
 
-    public int update(int id) {
+    public Usuario update(int id) {
         for (int i = 0; i < usuarios.size(); i++) {
-            if(usuarios.contains(id)){
-                usuarios.get(i).getId(id);
+            if (id == usuarios.get(i).getId(id)) {
+                return usuarios.get(i);
             }
         }
-            return id;
+        return null;
     }
-
 }
+
+
 

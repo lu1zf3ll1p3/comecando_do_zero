@@ -10,9 +10,9 @@ import java.util.Scanner;
 public class CadastroUsuariosMain {
 
     public static void main(String[] args) {
-        String teste = "S";
+        String continua = "S";
         UsuarioService service = new UsuarioService();
-        while (teste == "S") {
+        while (continua == "S") {
             Scanner scanner = new Scanner(System.in);
             System.out.println("#####################Sistema de Cadastro de Usuários#####################");
             System.out.println("Informe o nome do Usuário:");
@@ -29,15 +29,16 @@ public class CadastroUsuariosMain {
             service.save(usuario);
             System.out.println("Deseja continuar? [S/N]");
             if (scanner.next().equals("N")) {
-                teste = "N";
+                continua = "N";
             }
 
             System.out.println("Deseja Atualizar algum usuário ? [S/N]");
             if (scanner.next().equals("S")) {
                 System.out.println("Digite o ID que deseja atualizar: ");
                 int id = scanner.nextInt();
-                int updateId = service.update(id);
-                    if(updateId == id) {
+                 Usuario updateId = service.update(id);
+                    if (updateId != null) {
+                        usuario = updateId;
                         System.out.println("Qual item da lista acima você deseja Atualizar: ");
                         String atualizaInfo = scanner.next();
                         switch (atualizaInfo) {
