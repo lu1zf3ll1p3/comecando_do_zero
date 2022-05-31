@@ -32,7 +32,6 @@ public class CadastroUsuariosMain {
                 continua = "N";
             }
 
-
             System.out.println("Deseja Atualizar algum usuário ? [S/N]");
             if (scanner.next().equals("S")) {
                 String continuar = "S";
@@ -66,7 +65,7 @@ public class CadastroUsuariosMain {
                                 System.out.println("Este é o email escolhido: " + email);
                                 break;
 
-                            case "dataNascimento":
+                            case "nascimento":
                                 System.out.println("Digite o nova data do nascimento: ");
                                 dataNascimento = LocalDate.parse(scanner.next());
                                 usuario.setDataNascimento(LocalDate.parse(String.valueOf(dataNascimento)));
@@ -83,15 +82,16 @@ public class CadastroUsuariosMain {
                             default:
                                 System.out.println("Não foi possível realizar a sua alteração, verifique se está correta a informação a ser substituída.");
                         }
+
                     } else {
                         System.out.print("Id: " + id + " não encontrado.");
                     }
+
                     System.out.println("Deseja realizar mais alguma atualização ? [S/N]");
                     if (scanner.next().equals("N")) {
                         continuar = "N";
                     }
                 }
-
 
                 System.out.println("Deseja excluir algum usuário ? [S/N]");
                 if (scanner.next().equals("S")) {
@@ -104,7 +104,6 @@ public class CadastroUsuariosMain {
                         System.out.println("Esse ID: " + deletarId + " não pode ser excluido ou não existe !!!");
                     }
                 }
-
 
                 System.out.println("Deseja ver a lista de usuários cadastrados? [S/N]");
                 if (scanner.next().equals("S")) {
