@@ -71,7 +71,7 @@ public class UsuarioService {
             case "nome":
                 System.out.println("Digite o novo nome: ");
                 String nome = scanner.next();
-                usuarios.set(usuarios.get(nome)).setNome(nome);
+                usuarios.set(nome);
                 System.out.println("Este é o nome escolhido: " + nome);
                 break;
 
