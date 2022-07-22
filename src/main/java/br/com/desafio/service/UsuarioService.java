@@ -64,47 +64,50 @@ public class UsuarioService {
     }
 
 
-    public Usuario retornaInfo(String atualizaInfo){
+    public Usuario updateUsuario(String atualizaInfo) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Qual item da lista acima você deseja Atualizar: ");
-        switch (atualizaInfo) {
-            case "nome":
-                System.out.println("Digite o novo nome: ");
-                String nome = scanner.next();
-                usuarios.set(nome);
-                System.out.println("Este é o nome escolhido: " + nome);
-                break;
+        for (int i = 0; i < usuarios.size(); i++) {
 
-            case "cpf":
-                System.out.println("Digite o novo cpf: ");
-                String cpf = scanner.next();
-                usuarios.set(cpf);
-                System.out.println("Este é o cpf escolhido: " + cpf);
-                break;
+            switch (atualizaInfo) {
+                case "nome":
+                    System.out.println("Digite o novo nome: ");
+                    String nome = scanner.next();
+                    usuarios.get(i).setNome(nome);
+                    System.out.println("Este é o nome escolhido: " + nome);
+                    break;
 
-            case "email":
-                System.out.println("Digite o novo email: ");
-                String email = scanner.next();
-                usuarios.set(email);
-                System.out.println("Este é o email escolhido: " + email);
-                break;
+                case "cpf":
+                    System.out.println("Digite o novo cpf: ");
+                    String cpf = scanner.next();
+                    usuarios.get(i).setCpf(cpf);
+                    System.out.println("Este é o cpf escolhido: " + cpf);
+                    break;
 
-            case "nascimento":
-                System.out.println("Digite o nova data do nascimento: ");
-                LocalDate dataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                usuarios.setDataNascimento(LocalDate.parse(String.valueOf(dataNascimento)));
-                System.out.println("Esta é a nova data do nascimento escolhido: " + dataNascimento);
-                break;
+                case "email":
+                    System.out.println("Digite o novo email: ");
+                    String email = scanner.next();
+                    usuarios.get(i).setEmail(email);
+                    System.out.println("Este é o email escolhido: " + email);
+                    break;
 
-            case "sexo":
-                System.out.println("Digite o novo sexo: ");
-                Sexo sexo = scanner.next().equals("F") ? Sexo.FEMININO : Sexo.MASCULINO;
-                usuarios.setSexo(sexo);
-                System.out.println("Este é o sexo escolhido: " + sexo);
-                break;
+                case "nascimento":
+                    System.out.println("Digite o nova data do nascimento: ");
+                    LocalDate dataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                    usuarios.get(i).setDataNascimento(dataNascimento);
+                    System.out.println("Esta é a nova data do nascimento escolhido: " + dataNascimento);
+                    break;
 
-            default:
-                System.out.println("Não foi possível realizar a sua alteração, verifique se está correta a informação a ser substituída.");
+                case "sexo":
+                    System.out.println("Digite o novo sexo: ");
+                    Sexo sexo = scanner.next().equals("F") ? Sexo.FEMININO : Sexo.MASCULINO;
+                    usuarios.get(i).setSexo(sexo);
+                    System.out.println("Este é o sexo escolhido: " + sexo);
+                    break;
+
+                default:
+                    System.out.println("Não foi possível realizar a sua alteração, verifique se está correta a informação a ser substituída.");
+            }
+            break;
         }
         return null;
     }

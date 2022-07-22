@@ -40,8 +40,9 @@ public class CadastroUsuariosMain {
                     int id = scanner.nextInt();
                     Usuario updateId = service.retornaUsuario(id);
                     if (updateId != null) {
-                        String info = scanner.next();
-                        service.retornaInfo(info);
+                        System.out.println("Qual item da lista acima você deseja Atualizar: ");
+                        String atualizaInfo = scanner.next();
+                        service.updateUsuario(atualizaInfo);
                     }else {
                             System.out.print("Id: " + id + " não encontrado.");
                     }
