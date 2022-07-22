@@ -16,7 +16,7 @@ public class CadastroUsuariosMain {
             Scanner scanner = new Scanner(System.in);
             System.out.println("#####################Sistema de Cadastro de Usuários#####################");
             System.out.println("Informe o nome do Usuário:");
-            String nome = scanner.nextLine();
+             String nome = scanner.nextLine();
             System.out.println("Informe o CPF do Usuário:");
             String cpf = scanner.nextLine();
             System.out.println("Informe o email do Usuário:");
