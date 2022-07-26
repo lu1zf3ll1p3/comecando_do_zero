@@ -13,6 +13,7 @@ public class UsuarioService {
 
     private List<Usuario> usuarios;
 
+    //Cria uma nova lista de cadastros.
     public Usuario save(Usuario usuario) {
         if (usuarios == null) {
             usuarios = new ArrayList<>();
@@ -27,6 +28,7 @@ public class UsuarioService {
         return this.usuarios;
     }
 
+    //Gera um novo id para cada cadastro.
     private void setarId(Usuario usuario) {
         int id = 0;
         if (usuarios.isEmpty()) {
@@ -41,6 +43,7 @@ public class UsuarioService {
         }
     }
 
+    //Deleta um cadastro.
     public boolean delete(int id) {
         boolean find = false;
         for (int i = 0; i < usuarios.size(); i++) {
@@ -53,7 +56,7 @@ public class UsuarioService {
         return find;
     }
 
-
+    //Retorna um id de cadastro da lista.
     public Usuario retornaUsuario(int id) {
         for (int i = 0; i < usuarios.size(); i++) {
             if (id == usuarios.get(i).getId(id)) {
@@ -64,50 +67,58 @@ public class UsuarioService {
     }
 
 
+    //Retorna a alteração solicitada no cadastro.
     public Usuario updateUsuario(String atualizaInfo) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Digite o ID que deseja atualizar: ");
+        int id = scanner.nextInt();
+        Usuario updateId = retornaUsuario(id);
         for (int i = 0; i < usuarios.size(); i++) {
+            if (id == usuarios.get(i).getId(id)) {
+                if (updateId != null) {
+                    switch (atualizaInfo) {
+                        case "nome":
+                            System.out.println("Digite o novo nome: ");
+                            String nome = scanner.next();
+                            usuarios.get(i).setNome(nome);
+                            System.out.println("Este é o nome escolhido: " + nome);
+                            break;
 
-            switch (atualizaInfo) {
-                case "nome":
-                    System.out.println("Digite o novo nome: ");
-                    String nome = scanner.next();
-                    usuarios.get(i).setNome(nome);
-                    System.out.println("Este é o nome escolhido: " + nome);
-                    break;
+                        case "cpf":
+                            System.out.println("Digite o novo cpf: ");
+                            String cpf = scanner.next();
+                            usuarios.get(i).setCpf(cpf);
+                            System.out.println("Este é o cpf escolhido: " + cpf);
+                            break;
 
-                case "cpf":
-                    System.out.println("Digite o novo cpf: ");
-                    String cpf = scanner.next();
-                    usuarios.get(i).setCpf(cpf);
-                    System.out.println("Este é o cpf escolhido: " + cpf);
-                    break;
+                        case "email":
+                            System.out.println("Digite o novo email: ");
+                            String email = scanner.next();
+                            usuarios.get(i).setEmail(email);
+                            System.out.println("Este é o email escolhido: " + email);
+                            break;
 
-                case "email":
-                    System.out.println("Digite o novo email: ");
-                    String email = scanner.next();
-                    usuarios.get(i).setEmail(email);
-                    System.out.println("Este é o email escolhido: " + email);
-                    break;
+                        case "nascimento":
+                            System.out.println("Digite o nova data do nascimento: ");
+                            LocalDate dataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                            usuarios.get(i).setDataNascimento(dataNascimento);
+                            System.out.println("Esta é a nova data do nascimento escolhido: " + dataNascimento);
+                            break;
 
-                case "nascimento":
-                    System.out.println("Digite o nova data do nascimento: ");
-                    LocalDate dataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                    usuarios.get(i).setDataNascimento(dataNascimento);
-                    System.out.println("Esta é a nova data do nascimento escolhido: " + dataNascimento);
-                    break;
+                        case "sexo":
+                            System.out.println("Digite o novo sexo: ");
+                            Sexo sexo = scanner.next().equals("F") ? Sexo.FEMININO : Sexo.MASCULINO;
+                            usuarios.get(i).setSexo(sexo);
+                            System.out.println("Este é o sexo escolhido: " + sexo);
+                            break;
 
-                case "sexo":
-                    System.out.println("Digite o novo sexo: ");
-                    Sexo sexo = scanner.next().equals("F") ? Sexo.FEMININO : Sexo.MASCULINO;
-                    usuarios.get(i).setSexo(sexo);
-                    System.out.println("Este é o sexo escolhido: " + sexo);
-                    break;
-
-                default:
-                    System.out.println("Não foi possível realizar a sua alteração, verifique se está correta a informação a ser substituída.");
+                        default:
+                            System.out.println("Não foi possível realizar a sua alteração, verifique se está correta a informação a ser substituída.");
+                    }
+                } else {
+                    System.out.print("Id: " + id + " não encontrado.");
+                }
             }
-            break;
         }
         return null;
     }
