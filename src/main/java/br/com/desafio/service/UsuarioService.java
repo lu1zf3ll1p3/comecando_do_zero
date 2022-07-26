@@ -73,42 +73,42 @@ public class UsuarioService {
         System.out.println("Digite o ID que deseja atualizar: ");
         int id = scanner.nextInt();
         Usuario updateId = retornaUsuario(id);
-        for (int i = 0; i < usuarios.size(); i++) {
-            if (id == usuarios.get(i).getId(id)) {
+        for (Usuario usuario : usuarios) {
+            if (id == usuario.getId(id)) {
                 if (updateId != null) {
                     switch (atualizaInfo) {
                         case "nome":
                             System.out.println("Digite o novo nome: ");
                             String nome = scanner.next();
-                            usuarios.get(i).setNome(nome);
+                            usuario.setNome(nome);
                             System.out.println("Este é o nome escolhido: " + nome);
                             break;
 
                         case "cpf":
                             System.out.println("Digite o novo cpf: ");
                             String cpf = scanner.next();
-                            usuarios.get(i).setCpf(cpf);
+                            usuario.setCpf(cpf);
                             System.out.println("Este é o cpf escolhido: " + cpf);
                             break;
 
                         case "email":
                             System.out.println("Digite o novo email: ");
                             String email = scanner.next();
-                            usuarios.get(i).setEmail(email);
+                            usuario.setEmail(email);
                             System.out.println("Este é o email escolhido: " + email);
                             break;
 
                         case "nascimento":
                             System.out.println("Digite o nova data do nascimento: ");
                             LocalDate dataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                            usuarios.get(i).setDataNascimento(dataNascimento);
+                            usuario.setDataNascimento(dataNascimento);
                             System.out.println("Esta é a nova data do nascimento escolhido: " + dataNascimento);
                             break;
 
                         case "sexo":
                             System.out.println("Digite o novo sexo: ");
                             Sexo sexo = scanner.next().equals("F") ? Sexo.FEMININO : Sexo.MASCULINO;
-                            usuarios.get(i).setSexo(sexo);
+                            usuario.setSexo(sexo);
                             System.out.println("Este é o sexo escolhido: " + sexo);
                             break;
 

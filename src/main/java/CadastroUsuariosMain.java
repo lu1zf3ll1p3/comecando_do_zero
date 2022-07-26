@@ -11,10 +11,11 @@ public class CadastroUsuariosMain {
 
     public static void main(String[] args) {
 
-        // Realiza o Cadastro de Usuários.
+
         String continua = "S";
         UsuarioService service = new UsuarioService();
         while (continua == "S") {
+            // Realiza o Cadastro de Usuários.
             Scanner scanner = new Scanner(System.in);
             System.out.println("#####################Sistema de Cadastro de Usuários#####################");
             System.out.println("Informe o nome do Usuário:");
@@ -25,14 +26,12 @@ public class CadastroUsuariosMain {
             String email = scanner.next();
             System.out.println("Informe a data de nascimento do Usuário:");
             LocalDate dataNascimento = LocalDate.parse(scanner.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            System.out.println("Informe o sexo do Usuário:");
+            System.out.println("Informe o sexo do Usuário: \n");
             Sexo sexo = scanner.next().equalsIgnoreCase("F") ? Sexo.FEMININO : Sexo.MASCULINO;
+            //Cadastra o novo usuário.
             Usuario usuario = new Usuario(nome, cpf, email, dataNascimento, sexo);
             service.save(usuario);
-            System.out.println("Deseja continuar? [S/N]");
-            if (scanner.next().equalsIgnoreCase("N")) {
-                continua = "N";
-            }
+
 
             //Faz a Atualização das informações desejadas do cadastro.
             System.out.println("Deseja Atualizar algum usuário ? [S/N]");
@@ -69,6 +68,11 @@ public class CadastroUsuariosMain {
                 for (int i = 0; i < usuariosList.size(); i++) {
                     System.out.println(usuariosList.get(i).toString());
                 }
+            }
+
+            System.out.println("Deseja continuar? [S/N]");
+            if (scanner.next().equalsIgnoreCase("N")) {
+                continua = "N";
             }
         }
     }
