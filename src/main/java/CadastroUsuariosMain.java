@@ -26,7 +26,7 @@ public class CadastroUsuariosMain {
             String email = scanner.next();
             System.out.println("Informe a data de nascimento do Usuário:");
             LocalDate dataNascimento = LocalDate.parse(scanner.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            System.out.println("Informe o sexo do Usuário: \n");
+            System.out.println("Informe o sexo do Usuário: ");
             Sexo sexo = scanner.next().equalsIgnoreCase("F") ? Sexo.FEMININO : Sexo.MASCULINO;
             //Cadastra o novo usuário.
             Usuario usuario = new Usuario(nome, cpf, email, dataNascimento, sexo);
@@ -74,6 +74,11 @@ public class CadastroUsuariosMain {
             if (scanner.next().equalsIgnoreCase("N")) {
                 continua = "N";
             }
+
+            if (continua.equals("N")) {
+                System.err.println("Fim do programa !");
+            }
+
         }
     }
 }
