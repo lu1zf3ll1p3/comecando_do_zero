@@ -1,13 +1,10 @@
 package br.com.desafio.service;
 
 import br.com.desafio.model.entity.Usuario;
-import br.com.desafio.model.enums.Sexo;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class UsuarioService {
 
@@ -66,57 +63,12 @@ public class UsuarioService {
     }
 
     //Retorna a alteração solicitada no cadastro.
-    public Usuario updateUsuario(String atualizaInfo) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Digite o ID que deseja atualizar: ");
-        int id = scanner.nextInt();
-        Usuario usuario = retornaUsuario(id);
-        Integer updateId = usuario.getId(id);
-        if (updateId != null) {
-            switch (atualizaInfo) {
-                case "nome":
-                    System.out.println("Digite o novo nome: ");
-                    String nome = scanner.next();
-                    usuario.setNome(nome);
-                    System.out.println("Este é o nome escolhido: " + nome);
-                    break;
-
-                case "cpf":
-                    System.out.println("Digite o novo cpf: ");
-                    String cpf = scanner.next();
-                    usuario.setCpf(cpf);
-                    System.out.println("Este é o cpf escolhido: " + cpf);
-                    break;
-
-                case "email":
-                    System.out.println("Digite o novo email: ");
-                    String email = scanner.next();
-                    usuario.setEmail(email);
-                    System.out.println("Este é o email escolhido: " + email);
-                    break;
-
-                case "nascimento":
-                    System.out.println("Digite o nova data do nascimento: ");
-                    LocalDate dataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                    usuario.setDataNascimento(dataNascimento);
-                    System.out.println("Esta é a nova data do nascimento escolhido: " + dataNascimento);
-                    break;
-
-                case "sexo":
-                    System.out.println("Digite o novo sexo: ");
-                    Sexo sexo = scanner.next().equals("F") ? Sexo.FEMININO : Sexo.MASCULINO;
-                    usuario.setSexo(sexo);
-                    System.out.println("Este é o sexo escolhido: " + sexo);
-                    break;
-
-                default:
-                    System.out.println("Não foi possível realizar a sua alteração, verifique se está correta a informação a ser substituída.");
-            }
-        } else {
-            System.out.print("Id: " + id + " não encontrado.");
+    public Usuario update(int id, Usuario novoUsuario) {
+        int usuarioId = id - 1;
+        if (novoUsuario != usuarios) {
+            usuarios.set(usuarioId, novoUsuario);
         }
-
-        return null;
+        return novoUsuario;
     }
 
 }
