@@ -14,7 +14,7 @@ public class CadastroUsuariosMain {
         String continua = "S";
         UsuarioService service = new UsuarioService();
         while (continua == "S") {
-            // Realiza o Cadastro de Usu?rios.
+            //Realiza o Cadastro de Usu?rios.
             Scanner scanner = new Scanner(System.in);
             System.out.println("#####################Sistema de Cadastro de Usuários#####################");
             System.out.println("Informe o nome do Usuário:");
@@ -34,7 +34,7 @@ public class CadastroUsuariosMain {
 
 
             //Faz a Atualiza??o das informa??es desejadas do cadastro.
-            System.out.println("Deseja Atualizar algum usu?rio ? [S/N]");
+            System.out.println("Deseja Atualizar algum Usuário ? [S/N]");
             if (scanner.next().equalsIgnoreCase("S")) {
                 String continuar = "S";
                 //  while (continuar == "S") {
@@ -54,10 +54,9 @@ public class CadastroUsuariosMain {
                 Sexo novoSexo = scanner.next().equalsIgnoreCase("F") ? Sexo.FEMININO : Sexo.MASCULINO;
                 Usuario novoUsuario = new Usuario(id, novoNome, novoCpf, novoEmail, novaDataNascimento, novoSexo);
                 System.out.println(novoUsuario);
-                System.out.println("Deseja salvar as novas informarções ?[S/N]");
+                System.out.println("Deseja salvar as novas informações ?[S/N]");
                 if (scanner.next().equalsIgnoreCase("S")){
                 service.update(id, novoUsuario);
-                System.out.println(novoUsuario);
                 }
 
                 // System.out.println("Deseja realizar mais alguma atualiza??o ? [S/N]");
