@@ -32,36 +32,50 @@ public class CadastroUsuariosMain {
             service.save(usuario);
 
 
-
-            //Faz a Atualiza??o das informa??es desejadas do cadastro.
+            //Faz a Atualização das informações desejadas do cadastro.
             System.out.println("Deseja Atualizar algum Usuário ? [S/N]");
             if (scanner.next().equalsIgnoreCase("S")) {
                 String continuar = "S";
-                //  while (continuar == "S") {
+                while (continuar == "S") {
                 System.out.println("Digite o ID que deseja atualizar");
                 int id = scanner.nextInt();
                 Usuario usuarioEncontrado = service.retornaUsuario(id);
                 System.out.println(usuarioEncontrado.toString());
                 System.out.println("Informe o nome do Usuário:");
-                String novoNome = scanner.next();
+                scanner.nextLine();
+                String novoNome = scanner.nextLine();
                 System.out.println("Informe o CPF do Usuário:");
-                String novoCpf = scanner.next();
+                String novoCpf = scanner.nextLine();
                 System.out.println("Informe o email do Usuário:");
-                String novoEmail = scanner.next();
+                String novoEmail = scanner.nextLine();
                 System.out.println("Informe a data de nascimento do Usuário:");
-                LocalDate novaDataNascimento = LocalDate.parse(scanner.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                LocalDate novaDataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 System.out.println("Informe o sexo do Usuário: ");
-                Sexo novoSexo = scanner.next().equalsIgnoreCase("F") ? Sexo.FEMININO : Sexo.MASCULINO;
+                Sexo novoSexo = scanner.nextLine().equalsIgnoreCase("F") ? Sexo.FEMININO : Sexo.MASCULINO;
+                if (novoNome.equals("")) {
+                    novoNome = usuarioEncontrado.getNome(nome);
+                }
+                if (novoCpf.equals("")) {
+                    novoCpf = usuarioEncontrado.getCpf(cpf);
+                }
+                if (novoEmail.equals("")) {
+                    novoEmail = usuarioEncontrado.getEmail(email);
+                }
+                if (novaDataNascimento.equals("")) {
+                    novaDataNascimento = usuarioEncontrado.getDataNascimento(dataNascimento);
+                }
+                if(novoSexo.equals("")){
+                    novoSexo = usuarioEncontrado.getSexo(sexo);
+                }
                 Usuario novoUsuario = new Usuario(id, novoNome, novoCpf, novoEmail, novaDataNascimento, novoSexo);
                 System.out.println(novoUsuario);
                 System.out.println("Deseja salvar as novas informações ?[S/N]");
-                if (scanner.next().equalsIgnoreCase("S")){
-                service.update(id, novoUsuario);
+                if (scanner.next().equalsIgnoreCase("S")) {
+                    service.update(id, novoUsuario);
                 }
-
-                // System.out.println("Deseja realizar mais alguma atualiza??o ? [S/N]");
-                //  if (scanner.next().equalsIgnoreCase("N")) {
-                //      continuar = "N";
+                System.out.println("Deseja realizar mais alguma atualização ? [S/N]");
+                if (scanner.next().equalsIgnoreCase("N")) {
+                continuar = "N";
 
 
             }

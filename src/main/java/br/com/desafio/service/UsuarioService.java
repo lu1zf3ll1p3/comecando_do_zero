@@ -3,9 +3,7 @@ package br.com.desafio.service;
 import br.com.desafio.model.entity.Usuario;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class UsuarioService {
@@ -66,9 +64,8 @@ public class UsuarioService {
 
     //Retorna a alteração solicitada no cadastro.
     public Usuario update(int id, Usuario novoUsuario) {
-        int idCorrigido = id - 1;       
-            Map<Integer, Usuario> usuario = new HashMap<>();
-            usuario.put(idCorrigido, novoUsuario);
+        int idCorrigido = id - 1;
+        usuarios.set(idCorrigido, novoUsuario);
         return novoUsuario;
     }
 
