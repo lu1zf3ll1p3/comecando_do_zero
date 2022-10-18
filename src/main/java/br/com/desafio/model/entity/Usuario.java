@@ -21,14 +21,6 @@ public class Usuario {
         this.sexo = sexo;
     }
 
-    public Usuario(Integer id, String nome, String cpf, String email, LocalDate dataNascimento, Sexo sexo) {
-        this.id = id;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.email = email;
-        this.dataNascimento = dataNascimento;
-        this.sexo = sexo;
-    }
 
     public Integer getId(int id) {
         return this.id;

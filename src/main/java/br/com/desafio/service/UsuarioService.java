@@ -1,9 +1,13 @@
 package br.com.desafio.service;
 
 import br.com.desafio.model.entity.Usuario;
+import br.com.desafio.model.enums.Sexo;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class UsuarioService {
@@ -62,11 +66,51 @@ public class UsuarioService {
         return null;
     }
 
-    //Retorna a alteraÃ§Ã£o solicitada no cadastro.
-    public Usuario update(int id, Usuario novoUsuario) {
-        int idCorrigido = id - 1;
-        usuarios.set(idCorrigido, novoUsuario);
+    //Retorna a alteração solicitada no cadastro.
+    public Usuario create(Usuario novoUsuario) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("#####################Sistema de Cadastro de Usuários#####################");
+        System.out.println("Informe o nome do Usuário:");
+        String nome = scanner.nextLine();
+        System.out.println("Informe o CPF do Usuário:");
+        String cpf = scanner.nextLine();
+        System.out.println("Informe o email do Usuário:");
+        String email = scanner.nextLine();
+        LocalDate dataNascimento = null;
+        try {
+            System.out.println("Informe a data de nascimento do Usuário:");
+            dataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (Exception e) {
+            System.err.println("O Formato da data está errado");
+        }
+        System.out.println("Informe o sexo do Usuário: ");
+        Sexo sexo = scanner.nextLine().equalsIgnoreCase("F") ? Sexo.FEMININO : Sexo.MASCULINO;
+        Usuario usuario = new Usuario(nome, cpf, email, dataNascimento, sexo);
+        if (usuario.equals(null)) {
+            save(usuario);
+        }
         return novoUsuario;
     }
+
+    public Usuario insert(Usuario usuario) {
+        create(usuario);
+        save(usuario);
+        return usuario;
+    }
+
+
+    public Usuario update(Usuario update) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Digite o ID que deseja atualizar");
+        int id = scanner.nextInt();
+        Usuario usuarioEncontrado = retornaUsuario(id);
+        System.out.println(usuarioEncontrado.toString());
+        create(update);
+        int position = id - 1;
+        usuarios.set(position, usuarioEncontrado);
+        System.out.println(usuarioEncontrado);
+        return update;
+    }
+
 
 }
