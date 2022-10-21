@@ -24,31 +24,45 @@ public class CadastroUsuariosMain {
 
                 case 2: {
                     //Faz a Atualização das informações desejadas do cadastro.
-                    service.update(null);
-                    break;
+                    try {
+                        service.update(null);
+                        break;
+                    } catch (Exception e) {
+                        System.err.println("Não existem cadastros a serem atualizados !");
+                    }
                 }
 
                 case 3: {
                     //Realiza a Exclusão de algum cadastro dentro da lista.
-                    System.out.println("Qual ID você deseja deletar: ");
-                    int deletarId = scanner.nextInt();
-                    boolean deletado = service.delete(deletarId);
-                    if (deletado) {
-                        System.out.println("O ID Selecionado: " + deletarId + " foi exluido com sucesso.");
-                    } else {
-                        System.out.println("Esse ID: " + deletarId + " não pode ser excluido ou não existe !!!");
+                    try {
+
+
+                        System.out.println("Qual ID você deseja deletar: ");
+                        int deletarId = scanner.nextInt();
+                        boolean deletado = service.delete(deletarId);
+                        if (deletado) {
+                            System.out.println("O ID Selecionado: " + deletarId + " foi exluido com sucesso.");
+                        } else {
+                            System.out.println("Esse ID: " + deletarId + " não pode ser excluido ou não existe !!!");
+                        }
+                        break;
+                    }catch (Exception e){
+                        System.err.println("não foi possivel realizar essa exclusão !");
                     }
-                    break;
                 }
 
 
                 case 4: {
                     //Busca os cadastros da lista.
-                    List<Usuario> usuariosList = service.findAll();
-                    for (int i = 0; i < usuariosList.size(); i++) {
-                        System.out.println(usuariosList.get(i).toString());
+                    try {
+                        List<Usuario> usuariosList = service.findAll();
+                        for (int i = 0; i < usuariosList.size(); i++) {
+                            System.out.println(usuariosList.get(i).toString());
+                        }
+                        break;
+                    }catch (NullPointerException e){
+                        System.err.println("Não existem usuarios na lista... !");
                     }
-                    break;
                 }
 
 
