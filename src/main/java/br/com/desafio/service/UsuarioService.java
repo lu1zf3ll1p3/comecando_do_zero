@@ -2,13 +2,12 @@ package br.com.desafio.service;
 
 import br.com.desafio.model.entity.Usuario;
 import br.com.desafio.model.enums.Sexo;
-import org.hibernate.sql.Insert;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -78,14 +77,14 @@ public class UsuarioService {
         System.out.println("Informe o email do Usuário:");
         String email = scanner.next();
         LocalDate dataNascimento = null;
-       // do {
+        do {
             try {
                 System.out.println("Informe a data de nascimento do Usuário:");
                 dataNascimento = LocalDate.parse(scanner.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            } finally {
+            } catch (Exception e) {
                 System.err.println("O Formato da data inserida está errada. \nInsira a data com o formato correto 00/00/0000: ");
             }
-        //} while (dataNascimento != LocalDate.parse(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        } while (dataNascimento == null);
         System.out.println("Informe o sexo do Usuário: ");
         Sexo sexo = scanner.next().equalsIgnoreCase("F") ? Sexo.FEMININO : Sexo.MASCULINO;
         Usuario usuario = new Usuario(nome, cpf, email, dataNascimento, sexo);
@@ -93,42 +92,59 @@ public class UsuarioService {
         return cadastro;
     }
 
-
-    public Usuario update(Usuario novoUsuario) {
+    public Usuario update(Usuario atualizaUsuario) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Digite o ID que deseja atualizar");
         int id = scanner.nextInt();
         Usuario usuarioEncontrado = retornaUsuario(id);
         int position = id - 1;
         System.out.println(usuarioEncontrado.toString());
+        String user = usuarioEncontrado.toString();
+        String[] userArray = user.split(",");
+//        System.out.println(Arrays.toString(userArray));
+//        System.out.println(userArray[4]);
+        String nome = userArray[1].replace("nome=", "");
+        String cpf = userArray[2].replace("cpf=", "");
+        String dataNascimento = userArray[4].replace("dataNascimento=", "");
+//        System.out.println(d);
+        // String data = Arrays.toString(user.split("id=1, nome='1', cpf='a', email='a', dataNascimento, sexo=FEMININO"));
+        //System.out.println(data);
         System.out.println("Informe o nome do Usuário:");
         String novoNome = scanner.nextLine();
-        scanner.reset();
+        if (novoNome == ""){
+            novoNome = nome;
+        }
+        scanner.nextLine();
         System.out.println("Informe o CPF do Usuário:");
         String novoCpf = scanner.nextLine();
+        if (novoCpf == ""){
+            novoCpf = cpf;
+        }
         System.out.println("Informe o email do Usuário:");
         String novoEmail = scanner.nextLine();
         LocalDate novaDataNascimento = null;
-            try {
-                System.out.println("Informe a data de nascimento do Usuário:");
-                novaDataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            } /*catch (Exception e) {
-                if (novaDataNascimento.equals("")){
-                    novaDataNascimento = usuarioEncontrado.getDataNascimento(position);
-                }
-            }*/ finally {
-                System.err.println("O Formato da data inserida está errado");
+        try {
+            System.out.println("Informe a data de nascimento do Usuário:");
+            DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            novaDataNascimento = LocalDate.parse(scanner.nextLine(), formatador);
+            if (novaDataNascimento == null || novaDataNascimento.equals(""));
+            {
+                novaDataNascimento = LocalDate.from(formatador.parse(dataNascimento));
+                System.out.println("Data de Nascimento não alterada.");
             }
+        } catch (Exception e) {
+            System.err.println("O Formato da data inserida está errada. \nInsira a data com o formato correto 00/00/0000: ");
+        }
         System.out.println("Informe o sexo do Usuário: ");
-        Sexo novoSexo = Sexo.valueOf(scanner.nextLine());
-        Usuario usuario = new Usuario(id, novoNome, novoCpf, novoEmail, novaDataNascimento, novoSexo);
-        System.out.println(usuario);
+        Sexo novoSexo = scanner.nextLine().equalsIgnoreCase("F") ? Sexo.FEMININO : Sexo.MASCULINO;
+        Usuario novoUsuario = new Usuario(id, novoNome, novoCpf, novoEmail, novaDataNascimento, novoSexo);
+        System.out.println(novoUsuario);
         System.out.print("Você deseja atualizar as informações ? [S/N]");
         String aceite = scanner.next();
         if (aceite.equalsIgnoreCase("S")) {
-            usuarios.set(position, usuario);
+            usuarios.set(position, novoUsuario);
         }
-        return novoUsuario;
+        return atualizaUsuario;
     }
 
 }

@@ -13,7 +13,8 @@ public class CadastroUsuariosMain {
         Scanner scanner = new Scanner(System.in);
         while (continua == "S") {
             System.out.println("#####################Sistema de Cadastro de Usuários#####################");
-            System.out.print("Selecione a opção para continuar: \n[1]Cadastrar um novo usuário \n[2]Atualizar um usuário existente \n[3]Deletar um usuário existente \n[4]Listar usuários da lista \n[5]Sair \nSelecione: ");
+            System.out.print("Selecione a opção para continuar: \n[1]Cadastrar um novo usuário \n[2]Atualizar um usuário existente " +
+                    "\n[3]Deletar um usuário existente \n[4]Listar usuários da lista \n[5]Sair \nSelecione: ");
             int escolha = scanner.nextInt();
             switch (escolha) {
                 case 1: {
@@ -29,14 +30,13 @@ public class CadastroUsuariosMain {
                         break;
                     } catch (Exception e) {
                         System.err.println("Não existem cadastros a serem atualizados !");
+                        break;
                     }
                 }
 
                 case 3: {
                     //Realiza a Exclusão de algum cadastro dentro da lista.
                     try {
-
-
                         System.out.println("Qual ID você deseja deletar: ");
                         int deletarId = scanner.nextInt();
                         boolean deletado = service.delete(deletarId);
@@ -48,6 +48,7 @@ public class CadastroUsuariosMain {
                         break;
                     }catch (Exception e){
                         System.err.println("não foi possivel realizar essa exclusão !");
+                        break;
                     }
                 }
 
@@ -62,6 +63,7 @@ public class CadastroUsuariosMain {
                         break;
                     }catch (NullPointerException e){
                         System.err.println("Não existem usuarios na lista... !");
+                        break;
                     }
                 }
 
