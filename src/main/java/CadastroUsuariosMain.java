@@ -46,7 +46,7 @@ public class CadastroUsuariosMain {
                             System.out.println("Esse ID: " + deletarId + " não pode ser excluido ou não existe !!!");
                         }
                         break;
-                    }catch (Exception e){
+                    }catch (Exception exclusaoSemSucesso){
                         System.err.println("não foi possivel realizar essa exclusão !");
                         break;
                     }
@@ -61,7 +61,7 @@ public class CadastroUsuariosMain {
                             System.out.println(usuariosList.get(i).toString());
                         }
                         break;
-                    }catch (NullPointerException e){
+                    }catch (NullPointerException semUsuariosNaLista){
                         System.err.println("Não existem usuarios na lista... !");
                         break;
                     }

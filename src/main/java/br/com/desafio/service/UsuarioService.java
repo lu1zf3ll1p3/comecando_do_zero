@@ -81,8 +81,8 @@ public class UsuarioService {
             try {
                 System.out.println("Informe a data de nascimento do Usuário:");
                 dataNascimento = LocalDate.parse(scanner.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            } catch (Exception e) {
-                System.err.println("O Formato da data inserida está errada. \nInsira a data com o formato correto 00/00/0000: ");
+            } catch (Exception formatoErrado) {
+                System.err.print("O Formato da data inserida está errada. \nInsira a data com o formato correto 00/00/0000. \nInsira a data:");
             }
         } while (dataNascimento == null);
         System.out.println("Informe o sexo do Usuário: ");
@@ -97,51 +97,54 @@ public class UsuarioService {
         System.out.println("Digite o ID que deseja atualizar");
         int id = scanner.nextInt();
         Usuario usuarioEncontrado = retornaUsuario(id);
-        int position = id - 1;
         System.out.println(usuarioEncontrado.toString());
         String user = usuarioEncontrado.toString();
         String[] userArray = user.split(",");
-//        System.out.println(Arrays.toString(userArray));
-//        System.out.println(userArray[4]);
         String nome = userArray[1].replace("nome=", "");
         String cpf = userArray[2].replace("cpf=", "");
-        String dataNascimento = userArray[4].replace("dataNascimento=", "");
-//        System.out.println(d);
-        // String data = Arrays.toString(user.split("id=1, nome='1', cpf='a', email='a', dataNascimento, sexo=FEMININO"));
-        //System.out.println(data);
+        String email = userArray[3].replace("email=", "");
+        String dataNascimento = (userArray[4].replace("dataNascimento=", ""));
+        Sexo sexo = Sexo.valueOf(userArray[5].replace("sexo=", ""));
         System.out.println("Informe o nome do Usuário:");
         String novoNome = scanner.nextLine();
-        if (novoNome == ""){
+        if (novoNome == "" || novoNome == null){
             novoNome = nome;
         }
         scanner.nextLine();
         System.out.println("Informe o CPF do Usuário:");
         String novoCpf = scanner.nextLine();
-        if (novoCpf == ""){
+        if (novoCpf == "" || novoCpf == null){
             novoCpf = cpf;
         }
         System.out.println("Informe o email do Usuário:");
         String novoEmail = scanner.nextLine();
+        if (novoEmail == "" || novoEmail == null){
+            novoEmail = email;
+        }
         LocalDate novaDataNascimento = null;
         try {
             System.out.println("Informe a data de nascimento do Usuário:");
             DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            novaDataNascimento = LocalDate.parse(scanner.nextLine(), formatador);
+            novaDataNascimento = LocalDate.parse(scanner.next());
             if (novaDataNascimento == null || novaDataNascimento.equals(""));
             {
-                novaDataNascimento = LocalDate.from(formatador.parse(dataNascimento));
+                novaDataNascimento = formatador.format(dataNascimento);
                 System.out.println("Data de Nascimento não alterada.");
             }
-        } catch (Exception e) {
+        } catch (Exception formatoErrado) {
             System.err.println("O Formato da data inserida está errada. \nInsira a data com o formato correto 00/00/0000: ");
         }
         System.out.println("Informe o sexo do Usuário: ");
-        Sexo novoSexo = scanner.nextLine().equalsIgnoreCase("F") ? Sexo.FEMININO : Sexo.MASCULINO;
+        Sexo novoSexo = Sexo.valueOf(scanner.nextLine());
+        if (novoSexo == null){
+            novoSexo = sexo;
+        }
         Usuario novoUsuario = new Usuario(id, novoNome, novoCpf, novoEmail, novaDataNascimento, novoSexo);
         System.out.println(novoUsuario);
         System.out.print("Você deseja atualizar as informações ? [S/N]");
         String aceite = scanner.next();
         if (aceite.equalsIgnoreCase("S")) {
+            int position = id - 1;
             usuarios.set(position, novoUsuario);
         }
         return atualizaUsuario;
