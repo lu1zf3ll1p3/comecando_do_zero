@@ -66,16 +66,18 @@ public class Usuario {
         return this.dataNascimento;
     }
 
-    public void setDataNascimento(LocalDate dataNascimento) {
+    public LocalDate setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
+        return dataNascimento;
     }
 
     public Sexo getSexo(Sexo sexo) {
         return this.sexo;
     }
 
-    public void setSexo(Sexo sexo) {
+    public Sexo setSexo(Sexo sexo) {
         this.sexo = sexo;
+        return sexo;
     }
 
     @Override
