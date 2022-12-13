@@ -66,10 +66,7 @@ public class Usuario {
         return this.dataNascimento;
     }
 
-    public LocalDate setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
-        return dataNascimento;
-    }
+    public LocalDate setDataNascimento(LocalDate dataNascimento) {return this.dataNascimento = dataNascimento;}
 
     public Sexo getSexo() {
         return this.sexo;
