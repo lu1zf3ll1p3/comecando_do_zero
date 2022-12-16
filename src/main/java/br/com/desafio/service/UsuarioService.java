@@ -120,7 +120,7 @@ public class UsuarioService {
             novaDataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } catch (Exception formatoErrado) {
             novaDataNascimento = usuarios.get(position).getDataNascimento();
-            System.err.println("Data de Nascimento não alterada." + "\n"+novaDataNascimento);
+            System.err.println("Data de Nascimento não alterada." + "\n" + novaDataNascimento);
         }
         System.out.println("Informe o sexo do Usuário: ");
         Sexo novoSexo = scanner.nextLine().equalsIgnoreCase("F") ? Sexo.FEMININO : Sexo.MASCULINO;
