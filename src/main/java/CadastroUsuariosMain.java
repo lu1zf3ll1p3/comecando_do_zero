@@ -73,13 +73,14 @@ public class CadastroUsuariosMain {
                         } catch (Exception formatoErrado) {
                             dataNascimento = usuarioEncontrado.getDataNascimento(null);
                         }
-                        System.out.println("Informe o sexo do Usuário: [FEMININO/MASCULINO]");
-                        Sexo sexo = Sexo.valueOf(scanner.nextLine());
-                        if ("F".equalsIgnoreCase(String.valueOf(sexo))) {
-                            sexo = sexo.FEMININO;
-                        } else if ("M".equalsIgnoreCase(String.valueOf(sexo))) {
-                            sexo = sexo.MASCULINO;
-                        } else {
+                        System.out.println("Informe o sexo do Usuário: ");
+                        String novoSexo = scanner.nextLine();
+                        Sexo sexo;
+                        if(novoSexo.equalsIgnoreCase("M")){
+                            sexo = Sexo.MASCULINO;
+                        } else if (novoSexo.equalsIgnoreCase("F")) {
+                            sexo = Sexo.FEMININO;
+                        }else {
                             sexo = usuarioEncontrado.getSexo();
                         }
                         service.update(id, nome, cpf, email, dataNascimento, sexo);
