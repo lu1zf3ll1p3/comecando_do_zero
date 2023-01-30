@@ -20,6 +20,7 @@ public class Usuario {
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
     }
+
     public Usuario(int id, String nome, String cpf, String email, LocalDate dataNascimento, Sexo sexo) {
         this.id = id;
         this.nome = nome;
@@ -38,7 +39,7 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getNome() {
+    public String getNome(String nome) {
         return this.nome;
     }
 
@@ -46,7 +47,7 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public String getCpf() {
+    public String getCpf(String cpf) {
         return this.cpf;
     }
 
@@ -54,7 +55,7 @@ public class Usuario {
         this.cpf = cpf;
     }
 
-    public String getEmail() {
+    public String getEmail(String email) {
         return this.email;
     }
 
@@ -62,11 +63,13 @@ public class Usuario {
         this.email = email;
     }
 
-    public LocalDate getDataNascimento() {
+    public LocalDate getDataNascimento(LocalDate dataNascimento) {
         return this.dataNascimento;
     }
 
-    public LocalDate setDataNascimento(LocalDate dataNascimento) {return this.dataNascimento = dataNascimento;}
+    public LocalDate setDataNascimento(LocalDate dataNascimento) {
+        return this.dataNascimento = dataNascimento;
+    }
 
     public Sexo getSexo() {
         return this.sexo;
