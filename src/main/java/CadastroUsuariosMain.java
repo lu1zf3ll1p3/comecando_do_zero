@@ -14,7 +14,7 @@ public class CadastroUsuariosMain {
         String continua = "S";
         UsuarioService service = new UsuarioService();
         Scanner scanner = new Scanner(System.in);
-        while (continua == "S") {
+        while (continua.equals("S")) {
             System.out.println("#####################Sistema de Cadastro de Usuários#####################");
             System.out.print("Selecione a opção para continuar: \n[1]Cadastrar um novo usuário \n[2]Atualizar um usuário existente " +
                     "\n[3]Deletar um usuário existente \n[4]Listar usuários da lista \n[5]Sair \nSelecione: ");
@@ -36,7 +36,7 @@ public class CadastroUsuariosMain {
                         } catch (Exception formatoErrado) {
                             System.err.print("O Formato da data inserida está errada. \nInsira a data com o formato correto 00/00/0000. \n");
                         }
-                    } while (dataNascimento == null || dataNascimento.equals(""));
+                    } while (dataNascimento == null);
                     System.out.println("Informe o sexo do Usuário: ");
                     Sexo sexo = scanner.next().equalsIgnoreCase("F") ? Sexo.FEMININO : Sexo.MASCULINO;
                     Usuario usuario = new Usuario(nome, cpf, email, dataNascimento, sexo);
@@ -53,20 +53,20 @@ public class CadastroUsuariosMain {
                         scanner.nextLine();
                         System.out.println("Informe o nome do Usuário:");
                         String nome = scanner.nextLine();
-                        if (nome.equals("") || nome == null) {
+                        if (nome.equals("")) {
                             nome = usuarioEncontrado.getNome(nome);
                         }
                         System.out.println("Informe o CPF do Usuário:");
                         String cpf = scanner.nextLine();
-                        if (cpf.equals("") || cpf == null) {
+                        if (cpf.equals("")) {
                             cpf = usuarioEncontrado.getCpf(cpf);
                         }
                         System.out.println("Informe o email do Usuário:");
                         String email = scanner.nextLine();
-                        if (email.equals("") || email == null) {
+                        if (email.equals("")) {
                             email = usuarioEncontrado.getEmail(email);
                         }
-                        LocalDate dataNascimento = null;
+                        LocalDate dataNascimento;
                         try {
                             System.out.println("Informe a data de nascimento do Usuário:");
                             dataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -122,12 +122,9 @@ public class CadastroUsuariosMain {
                 }
                 default: {
                     continua = "N";
+                    System.err.println("Fim do Programa !!!");
                 }
             }
         }
-        if (continua.equals("N")) {
-            System.err.println("Fim do Programa !!!");
-        }
-
     }
 }
