@@ -71,7 +71,7 @@ public class Usuario {
         return this.dataNascimento = dataNascimento;
     }
 
-    public Sexo getSexo() {
+    public Sexo getSexo(Sexo sexo) {
         return this.sexo;
     }
 

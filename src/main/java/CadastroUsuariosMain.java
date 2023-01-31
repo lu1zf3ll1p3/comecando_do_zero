@@ -22,22 +22,22 @@ public class CadastroUsuariosMain {
             switch (escolha) {
                 case 1: {
                     //Realiza o Cadastro de Usuários.
-                    System.out.println("Informe o nome do Usuário:");
+                    System.out.print("Informe o nome do Usuário: ");
                     String nome = scanner.next();
-                    System.out.println("Informe o CPF do Usuário:");
+                    System.out.print("Informe o CPF do Usuário: ");
                     String cpf = scanner.next();
-                    System.out.println("Informe o email do Usuário:");
+                    System.out.print("Informe o email do Usuário: ");
                     String email = scanner.next();
                     LocalDate dataNascimento = null;
                     do {
                         try {
-                            System.out.println("Informe a data de nascimento do Usuário:");
+                            System.out.print("Informe a data de nascimento do Usuário: ");
                             dataNascimento = LocalDate.parse(scanner.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                         } catch (Exception formatoErrado) {
                             System.err.print("O Formato da data inserida está errada. \nInsira a data com o formato correto 00/00/0000. \n");
                         }
                     } while (dataNascimento == null);
-                    System.out.println("Informe o sexo do Usuário: ");
+                    System.out.print("Informe o sexo do Usuário: ");
                     Sexo sexo = scanner.next().equalsIgnoreCase("F") ? Sexo.FEMININO : Sexo.MASCULINO;
                     Usuario usuario = new Usuario(nome, cpf, email, dataNascimento, sexo);
                     service.save(usuario);
@@ -46,43 +46,31 @@ public class CadastroUsuariosMain {
                 case 2: {
                     //Faz a Atualização das informações desejadas do cadastro.
                     try {
-                        System.out.println("Digite o ID que deseja atualizar");
+                        System.out.println("Digite o ID que deseja atualizar: ");
                         int id = scanner.nextInt();
                         Usuario usuarioEncontrado = service.retornaUsuario(id);
                         System.out.println(usuarioEncontrado.toString());
                         scanner.nextLine();
-                        System.out.println("Informe o nome do Usuário:");
-                        String nome = scanner.nextLine();
-                        if (nome.equals("")) {
-                            nome = usuarioEncontrado.getNome(nome);
-                        }
-                        System.out.println("Informe o CPF do Usuário:");
-                        String cpf = scanner.nextLine();
-                        if (cpf.equals("")) {
-                            cpf = usuarioEncontrado.getCpf(cpf);
-                        }
-                        System.out.println("Informe o email do Usuário:");
-                        String email = scanner.nextLine();
-                        if (email.equals("")) {
-                            email = usuarioEncontrado.getEmail(email);
-                        }
+                        System.out.print("Informe o nome do Usuário: ");
+                        String nome = scanner.nextLine().equals("") ? nome = usuarioEncontrado.getNome(null) : scanner.nextLine();
+                        System.out.print("Informe o CPF do Usuário: ");
+                        String cpf = scanner.nextLine().equals("") ? cpf = usuarioEncontrado.getCpf(null) : scanner.nextLine();
+                        System.out.print("Informe o email do Usuário: ");
+                        String email = scanner.nextLine().equals("") ? email = usuarioEncontrado.getEmail(null) : scanner.nextLine();
+                        System.out.print("Informe a data de nascimento do Usuário: ");
                         LocalDate dataNascimento;
                         try {
-                            System.out.println("Informe a data de nascimento do Usuário:");
                             dataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                        } catch (Exception formatoErrado) {
+                        } catch (Exception inputVazio) {
                             dataNascimento = usuarioEncontrado.getDataNascimento(null);
                         }
-                        System.out.println("Informe o sexo do Usuário: ");
-                        String novoSexo = scanner.nextLine();
-                        Sexo sexo;
-                        if(novoSexo.equalsIgnoreCase("M")){
-                            sexo = Sexo.MASCULINO;
-                        } else if (novoSexo.equalsIgnoreCase("F")) {
-                            sexo = Sexo.FEMININO;
-                        }else {
-                            sexo = usuarioEncontrado.getSexo();
-                        }
+                        System.out.print("Informe o sexo do Usuário: ");
+                        String atualizaSexo = scanner.nextLine().toUpperCase();
+                        Sexo sexo = switch (atualizaSexo) {
+                            case "F" -> Sexo.FEMININO;
+                            case "M" -> Sexo.MASCULINO;
+                            default -> usuarioEncontrado.getSexo(null);
+                        };
                         service.update(id, nome, cpf, email, dataNascimento, sexo);
                         break;
                     } catch (Exception e) {
@@ -90,6 +78,7 @@ public class CadastroUsuariosMain {
                         break;
                     }
                 }
+
                 case 3: {
                     //Realiza a Exclusão de algum cadastro dentro da lista.
                     try {
@@ -111,8 +100,8 @@ public class CadastroUsuariosMain {
                     //Busca os cadastros da lista.
                     try {
                         List<Usuario> usuariosList = service.findAll();
-                        for (int i = 0; i < usuariosList.size(); i++) {
-                            System.out.println(usuariosList.get(i).toString());
+                        for (Usuario usuario : usuariosList) {
+                            System.out.println(usuario.toString());
                         }
                         break;
                     } catch (NullPointerException semUsuariosNaLista) {
