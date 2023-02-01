@@ -25,8 +25,6 @@ public class CadastroUsuariosMain {
                     //Realiza o Cadastro de Usuários.
                     System.out.println("Deseja realizar uma cadastro ou uma atualização: [C/A]");
                     String cadastro = scanner.nextLine();
-                    System.out.println("Digite o ID que deseja atualizar: ");
-                    int id = scanner.nextInt();
                     System.out.print("Informe o nome do Usuário: ");
                     String nome = scanner.nextLine();
                     System.out.print("Informe o CPF do Usuário: ");
@@ -47,8 +45,10 @@ public class CadastroUsuariosMain {
                     if (cadastro.equalsIgnoreCase("C")) {
                         service.save(usuario);
                     } else {
-                        if (service.save(usuario) != null) {
-                            System.out.println(usuario + "\n Deseja realizar essa alteração ? [S/N]");
+                        if (service.findAll() != null) {
+                            System.out.println("Digite o ID que deseja atualizar: ");
+                            int id = scanner.nextInt();
+                            System.out.println("\nDeseja realizar essa alteração ? [S/N]");
                             String alteracao = scanner.next();
                             if(alteracao.equalsIgnoreCase("s")) {
                                 service.update(id, nome, cpf, email, dataNascimento, sexo);
