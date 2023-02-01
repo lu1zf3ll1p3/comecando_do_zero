@@ -1,7 +1,9 @@
 package br.com.desafio.service;
 
 import br.com.desafio.model.entity.Usuario;
+import br.com.desafio.model.enums.Sexo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,11 +64,24 @@ public class UsuarioService {
         return null;
     }
 
-    public Usuario update(Integer id, Usuario usuario) {
+    public void update(int id, String nome, String cpf, String email, LocalDate dataNascimento, Sexo sexo) {
+        Usuario usuarioEncontrado = retornaUsuario(id);
+        System.out.println(usuarioEncontrado);
+        if(nome.equals("")){
+            nome = usuarioEncontrado.getNome(null);
+        }if(cpf.equals("")){
+            cpf = usuarioEncontrado.getCpf(null);
+        }if(email.equals("")){
+            email = usuarioEncontrado.getEmail(null);
+        }if (dataNascimento == null){
+            dataNascimento = usuarioEncontrado.getDataNascimento(null);
+        }if (sexo == null) {
+            sexo = usuarioEncontrado.getSexo(null);
+        }
+        Usuario usuario = new Usuario(id, nome, cpf, email, dataNascimento, sexo);
         System.out.println(usuario);
         int pessoa = id - 1;
         usuarios.set(pessoa, usuario);
-        return usuario;
     }
 
 }
