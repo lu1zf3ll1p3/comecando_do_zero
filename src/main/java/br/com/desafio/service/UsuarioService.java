@@ -1,9 +1,7 @@
 package br.com.desafio.service;
 
 import br.com.desafio.model.entity.Usuario;
-import br.com.desafio.model.enums.Sexo;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,11 +62,11 @@ public class UsuarioService {
         return null;
     }
 
-    public void update(int id, String nome, String cpf, String email, LocalDate dataNascimento, Sexo sexo) {
-        Usuario usuario = new Usuario(id, nome, cpf, email, dataNascimento, sexo);
+    public Usuario update(Integer id, Usuario usuario) {
         System.out.println(usuario);
-        int position = id - 1;
-        usuarios.set(position, usuario);
+        int pessoa = id - 1;
+        usuarios.set(pessoa, usuario);
+        return usuario;
     }
 
 }

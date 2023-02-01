@@ -20,36 +20,37 @@ public class CadastroUsuariosMain {
                     "\n[3]Deletar um usuário existente \n[4]Listar usuários da lista \n[5]Sair \nSelecione: ");
             int escolha = scanner.nextInt();
             switch (escolha) {
-                case 1: {
+                case 1 -> {
                     //Realiza o Cadastro de Usuários.
+                    System.out.println("Deseja realizar uma cadastro ou uma atualização: [C/A]");
+                    String cadastro = scanner.next();
+                    if (cadastro.equalsIgnoreCase("a")){
+                        System.out.println("Digite o ID que deseja atualizar: ");
+                        int id = scanner.nextInt();
+                        Usuario usuarioEncontrado = service.retornaUsuario(id);
+                        System.out.println(usuarioEncontrado);
+                    }
                     System.out.print("Informe o nome do Usuário: ");
-                    String nome = scanner.next();
+                    String nome = scanner.nextLine();
                     System.out.print("Informe o CPF do Usuário: ");
-                    String cpf = scanner.next();
+                    String cpf = scanner.nextLine();
                     System.out.print("Informe o email do Usuário: ");
-                    String email = scanner.next();
-                    LocalDate dataNascimento = null;
-                    do {
-                        try {
-                            System.out.print("Informe a data de nascimento do Usuário: ");
-                            dataNascimento = LocalDate.parse(scanner.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                        } catch (Exception formatoErrado) {
-                            System.err.print("O Formato da data inserida está errada. \nInsira a data com o formato correto 00/00/0000. \n");
-                        }
-                    } while (dataNascimento == null);
+                    String email = scanner.nextLine();
+                    System.out.print("Informe a data de nascimento do Usuário: ");
+                    LocalDate dataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                    System.err.print("O Formato da data inserida está errada. \nInsira a data com o formato correto 00/00/0000. \n");
                     System.out.print("Informe o sexo do Usuário: ");
-                    Sexo sexo = scanner.next().equalsIgnoreCase("F") ? Sexo.FEMININO : Sexo.MASCULINO;
+                    Sexo sexo = scanner.nextLine().equalsIgnoreCase("F") ? Sexo.FEMININO : Sexo.MASCULINO;
                     Usuario usuario = new Usuario(nome, cpf, email, dataNascimento, sexo);
-                    service.save(usuario);
-                    break;
+                    cadastro.equalsIgnoreCase("c") ? service.save(usuario) : service.update( usuario);
                 }
-                case 2: {
+                case 2 -> {
                     //Faz a Atualização das informações desejadas do cadastro.
                     try {
                         System.out.println("Digite o ID que deseja atualizar: ");
                         int id = scanner.nextInt();
                         Usuario usuarioEncontrado = service.retornaUsuario(id);
-                        System.out.println(usuarioEncontrado.toString());
+                        System.out.println(usuarioEncontrado);
                         scanner.nextLine();
                         System.out.print("Informe o nome do Usuário: ");
                         String nome = scanner.nextLine().equals("") ? nome = usuarioEncontrado.getNome(null) : scanner.nextLine();
@@ -71,15 +72,13 @@ public class CadastroUsuariosMain {
                             case "M" -> Sexo.MASCULINO;
                             default -> usuarioEncontrado.getSexo(null);
                         };
-                        service.update(id, nome, cpf, email, dataNascimento, sexo);
-                        break;
+                        Usuario usuario = new Usuario(id, nome, cpf, email, dataNascimento, sexo);
+                        service.update(id, usuario);
                     } catch (Exception e) {
                         System.err.println("Não existem cadastros a serem atualizados !");
-                        break;
                     }
                 }
-
-                case 3: {
+                case 3 -> {
                     //Realiza a Exclusão de algum cadastro dentro da lista.
                     try {
                         System.out.println("Qual ID você deseja deletar: ");
@@ -90,26 +89,22 @@ public class CadastroUsuariosMain {
                         } else {
                             System.out.println("Esse ID: " + deletarId + " não pode ser excluido ou não existe !!!");
                         }
-                        break;
                     } catch (Exception exclusaoSemSucesso) {
                         System.err.println("não foi possivel realizar essa exclusão !");
-                        break;
                     }
                 }
-                case 4: {
+                case 4 -> {
                     //Busca os cadastros da lista.
                     try {
                         List<Usuario> usuariosList = service.findAll();
                         for (Usuario usuario : usuariosList) {
                             System.out.println(usuario.toString());
                         }
-                        break;
                     } catch (NullPointerException semUsuariosNaLista) {
                         System.err.println("Não existem usuarios na lista... !");
-                        break;
                     }
                 }
-                default: {
+                default -> {
                     continua = "N";
                     System.err.println("Fim do Programa !!!");
                 }
