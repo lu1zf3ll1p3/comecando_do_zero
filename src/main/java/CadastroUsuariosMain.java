@@ -40,16 +40,17 @@ public class CadastroUsuariosMain {
                         dataNascimento = null;
                     }
                     System.out.print("Informe o sexo do Usuário: ");
-                    Sexo sexo = scanner.nextLine().equalsIgnoreCase("F") ? Sexo.FEMININO : scanner.nextLine().equalsIgnoreCase("M") ? Sexo.MASCULINO : null;
+                    String selecionaSexo = scanner.nextLine().toUpperCase();
+                    Sexo sexo = selecionaSexo.equals("F") ? Sexo.FEMININO : selecionaSexo.equals("M") ? Sexo.MASCULINO : null;
                     Usuario usuario = new Usuario(nome, cpf, email, dataNascimento, sexo);
                     if (cadastro.equalsIgnoreCase("C")) {
                         service.save(usuario);
                         System.out.println(usuario);
                     } else {
                         if (service.findAll() != null) {
-                            System.out.println("Digite o ID que deseja atualizar: ");
+                            System.out.print("Digite o ID que deseja atualizar: ");
                             int id = scanner.nextInt();
-                            System.out.println("\nDeseja realizar essa alteração ? [S/N]");
+                            System.out.println("Deseja realizar essa alteração ? [S/N]");
                             String alteracao = scanner.next();
                             if (alteracao.equalsIgnoreCase("s")) {
                                 service.update(id, nome, cpf, email, dataNascimento, sexo);
