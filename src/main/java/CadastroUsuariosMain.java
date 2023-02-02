@@ -23,7 +23,7 @@ public class CadastroUsuariosMain {
             switch (escolha) {
                 case 1 -> {
                     //Realiza o Cadastro de Usuários.
-                    System.out.println("Deseja realizar uma [C]adastro ou [A]tualização: ");
+                    System.out.print("Deseja realizar uma [C]adastro ou [A]tualização: ");
                     String cadastro = scanner.nextLine();
                     System.out.print("Informe o nome do Usuário: ");
                     String nome = scanner.nextLine();
@@ -40,8 +40,8 @@ public class CadastroUsuariosMain {
                         dataNascimento = null;
                     }
                     System.out.print("Informe o sexo do Usuário: ");
-                    String selecionaSexo = scanner.nextLine().toUpperCase();
-                    Sexo sexo = selecionaSexo.equals("F") ? Sexo.FEMININO : selecionaSexo.equals("M") ? Sexo.MASCULINO : null;
+                    String selecionaSexo = scanner.nextLine();
+                    Sexo sexo = selecionaSexo.equalsIgnoreCase("F") ? Sexo.FEMININO : selecionaSexo.equalsIgnoreCase("M") ? Sexo.MASCULINO : null;
                     Usuario usuario = new Usuario(nome, cpf, email, dataNascimento, sexo);
                     if (cadastro.equalsIgnoreCase("C")) {
                         service.save(usuario);

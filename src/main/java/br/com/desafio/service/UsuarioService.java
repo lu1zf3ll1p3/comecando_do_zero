@@ -66,21 +66,11 @@ public class UsuarioService {
 
     public void update(int id, String nome, String cpf, String email, LocalDate dataNascimento, Sexo sexo) {
         Usuario usuarioEncontrado = retornaUsuario(id);
-        if (nome.isEmpty()) {
-            nome = usuarioEncontrado.getNome(null);
-        }
-        if (cpf.isEmpty()) {
-            cpf = usuarioEncontrado.getCpf(null);
-        }
-        if (email.isEmpty()) {
-            email = usuarioEncontrado.getEmail(null);
-        }
-        if (dataNascimento == null) {
-            dataNascimento = usuarioEncontrado.getDataNascimento(null);
-        }
-        if (sexo == null) {
-            sexo = usuarioEncontrado.getSexo(null);
-        }
+        if (nome.isEmpty()) nome = usuarioEncontrado.getNome(null);
+        if (cpf.isEmpty()) cpf = usuarioEncontrado.getCpf(null);
+        if (email.isEmpty()) email = usuarioEncontrado.getEmail(null);
+        if (dataNascimento == null) dataNascimento = usuarioEncontrado.getDataNascimento(null);
+        if (sexo == null) sexo = usuarioEncontrado.getSexo(null);
         Usuario usuario = new Usuario(id, nome, cpf, email, dataNascimento, sexo);
         int pessoa = id - 1;
         usuarios.set(pessoa, usuario);
