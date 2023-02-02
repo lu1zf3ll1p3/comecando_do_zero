@@ -23,7 +23,7 @@ public class CadastroUsuariosMain {
             switch (escolha) {
                 case 1 -> {
                     //Realiza o Cadastro de Usuários.
-                    System.out.println("Deseja realizar uma cadastro ou uma atualização: [C/A]");
+                    System.out.println("Deseja realizar uma [C]adastro ou [A]tualização: ");
                     String cadastro = scanner.nextLine();
                     System.out.print("Informe o nome do Usuário: ");
                     String nome = scanner.nextLine();
@@ -36,24 +36,25 @@ public class CadastroUsuariosMain {
                     try {
                         dataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                     } catch (Exception e) {
+                        System.out.println("Data inválida. O campo será considerado vazio, assim colocando o existente.");
                         dataNascimento = null;
                     }
-                    System.err.print("O Formato da data inserida está errada. \nInsira a data com o formato correto 00/00/0000. \n");
                     System.out.print("Informe o sexo do Usuário: ");
-                    Sexo sexo = scanner.nextLine().equalsIgnoreCase("F") ? Sexo.FEMININO : Sexo.MASCULINO;
+                    Sexo sexo = scanner.nextLine().equalsIgnoreCase("F") ? Sexo.FEMININO : scanner.nextLine().equalsIgnoreCase("M") ? Sexo.MASCULINO : null;
                     Usuario usuario = new Usuario(nome, cpf, email, dataNascimento, sexo);
                     if (cadastro.equalsIgnoreCase("C")) {
                         service.save(usuario);
+                        System.out.println(usuario);
                     } else {
                         if (service.findAll() != null) {
                             System.out.println("Digite o ID que deseja atualizar: ");
                             int id = scanner.nextInt();
                             System.out.println("\nDeseja realizar essa alteração ? [S/N]");
                             String alteracao = scanner.next();
-                            if(alteracao.equalsIgnoreCase("s")) {
+                            if (alteracao.equalsIgnoreCase("s")) {
                                 service.update(id, nome, cpf, email, dataNascimento, sexo);
                             }
-                        }else {
+                        } else {
                             System.out.println("Não existem cadastros para serem atualizados.");
                         }
                     }
