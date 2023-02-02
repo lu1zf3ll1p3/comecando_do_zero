@@ -84,6 +84,7 @@ public class UsuarioService {
         Usuario usuario = new Usuario(id, nome, cpf, email, dataNascimento, sexo);
         int pessoa = id - 1;
         usuarios.set(pessoa, usuario);
+        System.out.println(usuario);
     }
 
 }
