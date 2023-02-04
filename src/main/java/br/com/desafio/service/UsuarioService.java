@@ -13,13 +13,10 @@ public class UsuarioService {
     private List<Usuario> usuarios;
 
     //Cria uma nova lista de cadastros.
-    public Usuario save(Usuario usuario) {
-        if (usuarios == null) {
-            usuarios = new ArrayList<>();
-        }
+    public void save(Usuario usuario) {
+        if (usuarios == null) usuarios = new ArrayList<>();
         setarId(usuario);
         usuarios.add(usuario);
-        return usuario;
     }
 
     public List<Usuario> findAll() {
@@ -57,9 +54,7 @@ public class UsuarioService {
     //Retorna um id de cadastro da lista.
     public Usuario retornaUsuario(int id) {
         for (Usuario usuario : usuarios) {
-            if (id == usuario.getId(id)) {
-                return usuario;
-            }
+            if (id == usuario.getId(id)) return usuario;
         }
         return null;
     }

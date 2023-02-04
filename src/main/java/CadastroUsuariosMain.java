@@ -11,9 +11,10 @@ public class CadastroUsuariosMain {
 
     public static void main(String[] args) {
 
-        String continua = "S";
         UsuarioService service = new UsuarioService();
         Scanner scanner = new Scanner(System.in);
+
+        String continua = "S";
         while (continua.equals("S")) {
             System.out.println("#####################Sistema de Cadastro de Usuários#####################");
             System.out.print("Selecione a opção para continuar: \n[1]Cadastrar um novo usuário ou Atualizar um usuário existente " +
@@ -36,7 +37,7 @@ public class CadastroUsuariosMain {
                     try {
                         dataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                     } catch (Exception e) {
-                        System.out.println("Data inválida. O campo será considerado vazio, assim colocando o existente.");
+                        System.err.println("Data inválida. O campo será considerado vazio, assim colocando o existente.");
                         dataNascimento = null;
                     }
                     System.out.print("Informe o sexo do Usuário: ");
@@ -50,13 +51,13 @@ public class CadastroUsuariosMain {
                         if (service.findAll() != null) {
                             System.out.print("Digite o ID que deseja atualizar: ");
                             int id = scanner.nextInt();
-                            System.out.println("Deseja realizar essa alteração ? [S/N]");
-                            String alteracao = scanner.next();
-                            if (alteracao.equalsIgnoreCase("s")) {
+                            System.out.println("Deseja realizar essa atualização ? [S/N]");
+                            String atualizacao = scanner.next();
+                            if (atualizacao.equalsIgnoreCase("S")) {
                                 service.update(id, nome, cpf, email, dataNascimento, sexo);
                             }
                         } else {
-                            System.out.println("Não existem cadastros para serem atualizados.");
+                            System.err.println("Não existem cadastros para serem atualizados.");
                         }
                     }
                 }

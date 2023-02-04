@@ -31,7 +31,7 @@ public class Usuario {
     }
 
 
-    public Integer getId(int id) {
+    public int getId(int id) {
         return this.id;
     }
 
