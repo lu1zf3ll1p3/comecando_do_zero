@@ -13,6 +13,9 @@ public class Usuario {
     private LocalDate dataNascimento;
     private Sexo sexo;
 
+    public Usuario() {
+    }
+
     public Usuario(String nome, String cpf, String email, LocalDate dataNascimento, Sexo sexo) {
         this.nome = nome;
         this.cpf = cpf;
@@ -31,7 +34,7 @@ public class Usuario {
     }
 
 
-    public int getId(int id) {
+    public int getId() {
         return this.id;
     }
 
@@ -39,7 +42,7 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getNome(String nome) {
+    public String getNome() {
         return this.nome;
     }
 
@@ -47,7 +50,7 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public String getCpf(String cpf) {
+    public String getCpf() {
         return this.cpf;
     }
 
@@ -55,7 +58,7 @@ public class Usuario {
         this.cpf = cpf;
     }
 
-    public String getEmail(String email) {
+    public String getEmail() {
         return this.email;
     }
 
@@ -63,7 +66,7 @@ public class Usuario {
         this.email = email;
     }
 
-    public LocalDate getDataNascimento(LocalDate dataNascimento) {
+    public LocalDate getDataNascimento() {
         return this.dataNascimento;
     }
 
@@ -71,7 +74,7 @@ public class Usuario {
         return this.dataNascimento = dataNascimento;
     }
 
-    public Sexo getSexo(Sexo sexo) {
+    public Sexo getSexo() {
         return this.sexo;
     }
 
@@ -79,6 +82,16 @@ public class Usuario {
         this.sexo = sexo;
         return sexo;
     }
+
+    public boolean campoNulo(Object campo) {
+        if(campo == null){
+            return true;
+        }else if(campo instanceof String){
+           return ((String) campo).isEmpty();
+        }
+        return false;
+    }
+
 
     @Override
     public String toString() {
