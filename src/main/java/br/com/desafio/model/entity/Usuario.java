@@ -1,8 +1,10 @@
 package br.com.desafio.model.entity;
 
 import br.com.desafio.model.enums.Sexo;
+import br.com.desafio.service.UsuarioService;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Usuario {
 
@@ -84,14 +86,21 @@ public class Usuario {
     }
 
     public boolean campoNulo(Object campo) {
-        if(campo == null){
+        if (campo == null) {
             return true;
-        }else if(campo instanceof String){
-           return ((String) campo).isEmpty();
+        } else if (campo instanceof String) {
+            return ((String) campo).isEmpty();
         }
         return false;
     }
 
+    public void campoVazio(String entrada) {
+        Scanner scanner = new Scanner(System.in);
+        while (campoNulo(entrada)) {
+            System.out.print("O campo precisa ser preenchido ! Digite novamente: ");
+            entrada = scanner.nextLine();
+        }
+    }
 
     @Override
     public String toString() {
