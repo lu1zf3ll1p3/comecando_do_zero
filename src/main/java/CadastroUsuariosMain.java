@@ -23,20 +23,20 @@ public class CadastroUsuariosMain {
             scanner.nextLine();
             switch (escolha) {
                 case 1 -> {
-                    System.out.print("Informe o nome do Usuário: ");
+                    usuario.nome();
                     String nome = scanner.nextLine();
                     usuario.campoVazio(nome);
-                    System.out.print("Informe o CPF do Usuário: ");
+                    usuario.cpf();
                     String cpf = scanner.nextLine();
                     usuario.campoVazio(cpf);
-                    System.out.print("Informe o email do Usuário: ");
+                    usuario.email();
                     String email = scanner.nextLine();
                     usuario.campoVazio(email);
-                    System.out.print("Informe a data de nascimento do Usuário: ");
+                    usuario.dataNascimento();
                     String data = scanner.nextLine();
                     usuario.campoVazio(data);
                     LocalDate dataNascimento = LocalDate.parse(data, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                    System.out.print("Informe o sexo do Usuário: ");
+                    usuario.sexo();
                     Sexo sexo;
                     String atualizaSexo = scanner.nextLine();
                     usuario.campoVazio(atualizaSexo);

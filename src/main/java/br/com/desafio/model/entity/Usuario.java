@@ -1,7 +1,7 @@
 package br.com.desafio.model.entity;
 
 import br.com.desafio.model.enums.Sexo;
-import br.com.desafio.service.UsuarioService;
+
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -102,6 +102,27 @@ public class Usuario {
         }
     }
 
+    public void nome() {
+        System.out.print("Informe o nome do Usuário: ");
+    }
+
+    public void cpf() {
+        System.out.print("Informe o CPF do Usuário: ");
+    }
+
+    public void email() {
+        System.out.print("Informe o email do Usuário: ");
+    }
+
+    public void dataNascimento() {
+        System.out.print("Informe a data de nascimento do Usuário: ");
+    }
+
+    public void sexo() {
+        System.out.print("Informe o sexo do Usuário: ");
+
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -113,5 +134,4 @@ public class Usuario {
                 ", sexo=" + sexo +
                 '}';
     }
-
 }

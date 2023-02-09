@@ -1,9 +1,6 @@
 package br.com.desafio.service;
-
 import br.com.desafio.model.entity.Usuario;
-import br.com.desafio.model.enums.Sexo;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,5 +61,7 @@ public class UsuarioService {
         id--;
         usuarios.set(id, usuario);
     }
+
+
 
 }
