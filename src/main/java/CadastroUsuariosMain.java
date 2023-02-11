@@ -1,5 +1,6 @@
 import br.com.desafio.model.entity.Usuario;
 import br.com.desafio.model.enums.Sexo;
+import br.com.desafio.service.Formulario;
 import br.com.desafio.service.UsuarioService;
 
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ public class CadastroUsuariosMain {
 
     public static void main(String[] args) {
         UsuarioService service = new UsuarioService();
-        Usuario usuario = new Usuario();
+        Formulario formulario = new Formulario();
         Scanner scanner = new Scanner(System.in);
 
         String continua = "S";
@@ -23,26 +24,17 @@ public class CadastroUsuariosMain {
             scanner.nextLine();
             switch (escolha) {
                 case 1 -> {
-                    usuario.nome();
-                    String nome = scanner.nextLine();
-                    usuario.campoVazio(nome);
-                    usuario.cpf();
-                    String cpf = scanner.nextLine();
-                    usuario.campoVazio(cpf);
-                    usuario.email();
-                    String email = scanner.nextLine();
-                    usuario.campoVazio(email);
-                    usuario.dataNascimento();
-                    String data = scanner.nextLine();
-                    usuario.campoVazio(data);
-                    LocalDate dataNascimento = LocalDate.parse(data, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                    usuario.sexo();
-                    Sexo sexo;
-                    String atualizaSexo = scanner.nextLine();
-                    usuario.campoVazio(atualizaSexo);
-                    sexo = atualizaSexo.equalsIgnoreCase("f") ? Sexo.FEMININO : Sexo.MASCULINO;
-                    Usuario novoUsuario = new Usuario(nome, cpf, email, dataNascimento, sexo);
-                    service.save(novoUsuario);
+                    System.out.println("Deseja realizar um novo [C]adrastro ou uma [A]tualização: ");
+                    String selecao = scanner.nextLine();
+                    if (selecao.equalsIgnoreCase("c")) {
+                        Usuario novoUsuario = new Usuario(formulario.nome(), formulario.cpf(), formulario.email(), formulario.dataNascimento(), formulario.sexo());
+                        service.save(novoUsuario);
+                    } else if (selecao.equalsIgnoreCase("a")) {
+                        Usuario atualizaUsuario = new Usuario(formulario.id(), formulario.nome(), formulario.cpf(), formulario.email(), formulario.dataNascimento(), formulario.sexo());
+                        service.update(atualizaUsuario);
+                    }else {
+                        System.out.println("Não foi possivel realizar sua solicitação tente novamente !");
+                    }
                 }
 
                /* case 2 -> {
@@ -79,31 +71,31 @@ public class CadastroUsuariosMain {
                     System.out.println(usuario);
                 }
 */
-                case 3 -> {
-                    //Realiza a Exclusão de algum cadastro dentro da lista.
-                    System.out.println("Qual ID você deseja deletar: ");
-                    int deletarId = scanner.nextInt();
-                    boolean deletado = service.delete(deletarId);
-                    if (deletado) {
-                        System.out.println("O ID Selecionado: " + deletarId + " foi exluido com sucesso.");
-                    } else {
-                        System.out.println("Esse ID: " + deletarId + " não pode ser excluido ou não existe !!!");
+                    case 2 -> {
+                        //Realiza a Exclusão de algum cadastro dentro da lista.
+                        System.out.println("Qual ID você deseja deletar: ");
+                        int deletarId = scanner.nextInt();
+                        boolean deletado = service.delete(deletarId);
+                        if (deletado) {
+                            System.out.println("O ID Selecionado: " + deletarId + " foi exluido com sucesso.");
+                        } else {
+                            System.out.println("Esse ID: " + deletarId + " não pode ser excluido ou não existe !!!");
 
+                        }
                     }
-                }
 
-                case 4 -> {
-                    //Busca os cadastros da lista.
-                    List<Usuario> usuariosList = service.findAll();
-                    for (Usuario usuarios : usuariosList) {
-                        System.out.println(usuarios.toString());
+                    case 3 -> {
+                        //Busca os cadastros da lista.
+                        List<Usuario> usuariosList = service.findAll();
+                        for (Usuario usuarios : usuariosList) {
+                            System.out.println(usuarios.toString());
+                        }
                     }
-                }
-                default -> {
-                    continua = "N";
-                    System.err.println("Fim do Programa !!!");
+                    default -> {
+                        continua = "N";
+                        System.err.println("Fim do Programa !!!");
+                    }
                 }
             }
         }
     }
-}

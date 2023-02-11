@@ -4,7 +4,6 @@ import br.com.desafio.model.enums.Sexo;
 
 
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class Usuario {
 
@@ -92,35 +91,6 @@ public class Usuario {
             return ((String) campo).isEmpty();
         }
         return false;
-    }
-
-    public void campoVazio(String entrada) {
-        Scanner scanner = new Scanner(System.in);
-        while (campoNulo(entrada)) {
-            System.out.print("O campo precisa ser preenchido ! Digite novamente: ");
-            entrada = scanner.nextLine();
-        }
-    }
-
-    public void nome() {
-        System.out.print("Informe o nome do Usuário: ");
-    }
-
-    public void cpf() {
-        System.out.print("Informe o CPF do Usuário: ");
-    }
-
-    public void email() {
-        System.out.print("Informe o email do Usuário: ");
-    }
-
-    public void dataNascimento() {
-        System.out.print("Informe a data de nascimento do Usuário: ");
-    }
-
-    public void sexo() {
-        System.out.print("Informe o sexo do Usuário: ");
-
     }
 
     @Override
