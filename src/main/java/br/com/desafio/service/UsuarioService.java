@@ -1,4 +1,5 @@
 package br.com.desafio.service;
+
 import br.com.desafio.model.entity.Usuario;
 
 import java.util.ArrayList;
@@ -10,10 +11,13 @@ public class UsuarioService {
     private List<Usuario> usuarios;
 
     //Cria uma nova lista de cadastros.
-    public void save(Usuario usuario) {
-        if (usuarios == null) usuarios = new ArrayList<>();
+    public Usuario save(Usuario usuario) {
+        if (usuarios == null) {
+            usuarios = new ArrayList<>();
+        }
         setarId(usuario);
         usuarios.add(usuario);
+        return usuario;
     }
 
     public List<Usuario> findAll() {
@@ -51,17 +55,20 @@ public class UsuarioService {
     //Retorna um id de cadastro da lista.
     public Usuario retornaUsuario(int id) {
         for (Usuario usuario : usuarios) {
-            if (id == usuario.getId()) return usuario;
+            if (id == usuario.getId()) {
+                return usuario;
+            }
         }
         return null;
     }
 
     public void update(Usuario usuario) {
+
+
         int id = usuario.getId();
         id--;
         usuarios.set(id, usuario);
     }
-
 
 
 }
