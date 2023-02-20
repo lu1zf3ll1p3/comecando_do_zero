@@ -63,9 +63,13 @@ public class UsuarioService {
     }
 
     public void update(Usuario usuario) {
-
-
         int id = usuario.getId();
+        Usuario usuarioEncontrado = retornaUsuario(id);
+        if (usuario.getNome().isEmpty()) usuario.setNome(usuarioEncontrado.getNome());
+        if (usuario.getCpf().isEmpty()) usuario.setCpf(usuarioEncontrado.getCpf());
+        if (usuario.getEmail().isEmpty()) usuario.setEmail(usuarioEncontrado.getEmail());
+        if (usuario.getDataNascimento() == null) usuario.setDataNascimento(usuarioEncontrado.getDataNascimento());
+        if (usuario.getSexo() == null) usuario.setSexo(usuarioEncontrado.getSexo());
         id--;
         usuarios.set(id, usuario);
     }

@@ -28,8 +28,8 @@ public class CadastroUsuariosMain {
                                 formulario.campoVazio(formulario.nome()),
                                 formulario.campoVazio(formulario.cpf()),
                                 formulario.campoVazio(formulario.email()),
-                                formulario.dataNascimento(),
-                                formulario.sexo());
+                                formulario.campoVazio(formulario.dataNascimento()),
+                                formulario.campoVazio(formulario.sexo()));
                         service.save(usuario);
                     } else if (selecao.equalsIgnoreCase("a")) {
                         System.out.println("Digite o id a ser atualizado: ");
@@ -37,7 +37,12 @@ public class CadastroUsuariosMain {
                         scanner.nextLine();
                         Usuario usuarioEncontrado = service.retornaUsuario(id);
                         System.out.println(usuarioEncontrado.toString());
-                        Usuario atualizaUsuario = new Usuario(id, formulario.nome(), formulario.cpf(), formulario.email(), formulario.dataNascimento(), formulario.sexo());
+                        Usuario atualizaUsuario = new Usuario(id,
+                                formulario.nome(),
+                                formulario.cpf(),
+                                formulario.email(),
+                                formulario.dataNascimento(),
+                                formulario.sexo());
                         service.update(atualizaUsuario);
                     } else {
                         System.out.println("Não foi possivel realizar sua solicitação tente novamente !");
@@ -78,7 +83,7 @@ public class CadastroUsuariosMain {
                     System.out.println(usuario);
                 }*/
 
-               /* case 2 -> {
+                case 2 -> {
                     //Realiza a Exclusão de algum cadastro dentro da lista.
                     System.out.println("Qual ID você deseja deletar: ");
                     int deletarId = scanner.nextInt();
@@ -89,7 +94,7 @@ public class CadastroUsuariosMain {
                         System.out.println("Esse ID: " + deletarId + " não pode ser excluido ou não existe !!!");
 
                     }
-                }*/
+                }
 
                 case 3 -> {
                     //Busca os cadastros da lista.
