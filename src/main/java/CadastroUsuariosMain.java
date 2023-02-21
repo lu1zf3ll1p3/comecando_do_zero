@@ -37,8 +37,7 @@ public class CadastroUsuariosMain {
                         scanner.nextLine();
                         Usuario usuarioEncontrado = service.retornaUsuario(id);
                         System.out.println(usuarioEncontrado.toString());
-                        Usuario atualizaUsuario = new Usuario(id,
-                                formulario.nome(),
+                        Usuario atualizaUsuario = new Usuario(id, formulario.nome(),
                                 formulario.cpf(),
                                 formulario.email(),
                                 formulario.dataNascimento(),
@@ -48,40 +47,6 @@ public class CadastroUsuariosMain {
                         System.out.println("Não foi possivel realizar sua solicitação tente novamente !");
                     }
                 }
-
-                /*case 2 -> {
-                    System.out.println("Digite o id a ser atualizado: ");
-                    int id = scanner.nextInt();
-                    scanner.nextLine();
-                    Usuario usuarioEncontrado = service.retornaUsuario(id);
-                    System.out.println(usuarioEncontrado.toString());
-                    System.out.println("Informe o nome do Usuário: ");
-                    String nome = scanner.nextLine();
-                    if (nome.isEmpty()) nome = usuarioEncontrado.getNome();
-                    System.out.println("Informe o CPF do Usuário: ");
-                    String cpf = scanner.nextLine();
-                    if (cpf.isEmpty()) cpf = usuarioEncontrado.getCpf();
-                    System.out.println("Informe o email do Usuário: ");
-                    String email = scanner.nextLine();
-                    if (email.isEmpty()) email = usuarioEncontrado.getEmail();
-                    System.out.println("Informe a data de nascimento do Usuário: ");
-                    String data = scanner.nextLine();
-                    LocalDate dataNascimento = null;
-                    if (data != null && !data.isEmpty()) {
-                        dataNascimento = LocalDate.parse(data, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                    }
-                    if (dataNascimento == null) dataNascimento = usuarioEncontrado.getDataNascimento();
-                    System.out.println("Informe o sexo do Usuário: ");
-                    String atualizaSexo = scanner.nextLine();
-                    Sexo sexo = null;
-                    if (atualizaSexo != null && !atualizaSexo.isEmpty()) {
-                        sexo = atualizaSexo.equalsIgnoreCase("f") ? Sexo.FEMININO : Sexo.MASCULINO;
-                    }
-                    if (sexo == null) sexo = usuarioEncontrado.getSexo();
-                    Usuario usuario = new Usuario(id, nome, cpf, email, dataNascimento, sexo);
-                    service.update(usuario);
-                    System.out.println(usuario);
-                }*/
 
                 case 2 -> {
                     //Realiza a Exclusão de algum cadastro dentro da lista.
@@ -109,5 +74,6 @@ public class CadastroUsuariosMain {
                 }
             }
         }
+
     }
 }

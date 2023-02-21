@@ -5,7 +5,6 @@ import br.com.desafio.model.entity.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class UsuarioService {
 
     private List<Usuario> usuarios;
@@ -73,6 +72,5 @@ public class UsuarioService {
         id--;
         usuarios.set(id, usuario);
     }
-
 
 }
