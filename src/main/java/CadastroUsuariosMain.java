@@ -1,54 +1,43 @@
 import br.com.desafio.model.entity.Usuario;
-import br.com.desafio.service.Formulario;
+import br.com.desafio.model.enums.Sexo;
 import br.com.desafio.service.UsuarioService;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
 public class CadastroUsuariosMain {
+    static Scanner scanner = new Scanner(System.in);
+    static UsuarioService service = new UsuarioService();
 
     public static void main(String[] args) {
-        UsuarioService service = new UsuarioService();
-        Formulario formulario = new Formulario();
-        Scanner scanner = new Scanner(System.in);
 
         String continua = "S";
         while (continua.equals("S")) {
             System.out.println("#####################Sistema de Cadastro de Usuários#####################");
-            System.out.print("Selecione a opção para continuar: \n[1]Cadastrar um novo usuário ou Atualizar um usuário existente " +
-                    "\n[2]Deletar um usuário existente \n[3]Listar usuários da lista \n[4]Sair \nSelecione: ");
+            System.out.print("Selecione a opção para continuar: \n[1]Cadastrar um novo usuário  \n[2]Atualizar um usuário existente " +
+                    "\n[3]Deletar um usuário existente \n[4]Listar usuários da lista \n[5]Sair \nSelecione: ");
             int escolha = scanner.nextInt();
             scanner.nextLine();
             switch (escolha) {
-                case 1 -> {
-                    System.out.println("Deseja realizar um novo [C]adrastro ou uma [A]tualização: ");
-                    String selecao = scanner.nextLine();
-                    if (selecao.equalsIgnoreCase("c")) {
-                        Usuario usuario = new Usuario(
-                                formulario.campoVazio(formulario.nome()),
-                                formulario.campoVazio(formulario.cpf()),
-                                formulario.campoVazio(formulario.email()),
-                                formulario.campoVazio(formulario.dataNascimento()),
-                                formulario.campoVazio(formulario.sexo()));
-                        service.save(usuario);
-                    } else if (selecao.equalsIgnoreCase("a")) {
+                case 1 -> service.save(usuario());
+                case 2 -> {
+                    try {
                         System.out.println("Digite o id a ser atualizado: ");
                         int id = scanner.nextInt();
                         scanner.nextLine();
                         Usuario usuarioEncontrado = service.retornaUsuario(id);
                         System.out.println(usuarioEncontrado.toString());
-                        Usuario atualizaUsuario = new Usuario(id, formulario.nome(),
-                                formulario.cpf(),
-                                formulario.email(),
-                                formulario.dataNascimento(),
-                                formulario.sexo());
-                        service.update(atualizaUsuario);
-                    } else {
-                        System.out.println("Não foi possivel realizar sua solicitação tente novamente !");
+                        Usuario usuarioAtualizado = usuario();
+                        usuarioAtualizado.setId(id);
+                        service.update(usuarioAtualizado);
+                    } catch (Exception idNaoEncontrado) {
+                        System.out.println("O ID informado não foi encontrado! ");
                     }
                 }
-
-                case 2 -> {
+                case 3 -> {
                     //Realiza a Exclusão de algum cadastro dentro da lista.
                     System.out.println("Qual ID você deseja deletar: ");
                     int deletarId = scanner.nextInt();
@@ -57,23 +46,41 @@ public class CadastroUsuariosMain {
                         System.out.println("O ID Selecionado: " + deletarId + " foi exluido com sucesso.");
                     } else {
                         System.out.println("Esse ID: " + deletarId + " não pode ser excluido ou não existe !!!");
-
                     }
                 }
-
-                case 3 -> {
+                case 4 -> {
                     //Busca os cadastros da lista.
                     List<Usuario> usuariosList = service.findAll();
                     for (Usuario usuarios : usuariosList) {
                         System.out.println(usuarios.toString());
                     }
                 }
-                default -> {
+                case 5 -> {
                     continua = "N";
                     System.err.println("Fim do Programa !!!");
                 }
+                default -> System.out.println("Seleção invalida");
             }
         }
-
     }
+
+    public static Usuario usuario() {
+        System.out.print("Insira seu nome: ");
+        String nome = scanner.nextLine();
+        System.out.print("Insira seu cpf: ");
+        String cpf = scanner.nextLine();
+        System.out.print("Insira seu email: ");
+        String email = scanner.nextLine();
+        System.out.print("Insira sua data de nascimento [dd/MM/aaaa]: ");
+        LocalDate dataNascimento = null;
+        try {
+            dataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (DateTimeException dataVazia) {
+            System.out.println("data sem informação !");
+        }
+        System.out.print("Insira seu sexo [F/M]: ");
+        Sexo sexo = scanner.nextLine().equalsIgnoreCase("f") ? Sexo.FEMININO : Sexo.MASCULINO;
+        return new Usuario(nome, cpf, email, dataNascimento, sexo);
+    }
+
 }

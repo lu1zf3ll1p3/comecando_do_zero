@@ -10,13 +10,12 @@ public class UsuarioService {
     private List<Usuario> usuarios;
 
     //Cria uma nova lista de cadastros.
-    public Usuario save(Usuario usuario) {
+    public void save(Usuario usuario) {
         if (usuarios == null) {
             usuarios = new ArrayList<>();
         }
         setarId(usuario);
         usuarios.add(usuario);
-        return usuario;
     }
 
     public List<Usuario> findAll() {
@@ -25,30 +24,19 @@ public class UsuarioService {
 
     //Gera um novo id para cada cadastro.
     private void setarId(Usuario usuario) {
-        int id = 0;
-        if (usuarios.isEmpty()) {
-            id++;
-            usuario.setId(id);
-        } else {
-            if (usuarios.get(usuarios.size() - 1) != null) {
-                id = usuarios.get(usuarios.size() - 1).getId();
-                id++;
-                usuario.setId(id);
-            }
-        }
+        int id = usuarios.isEmpty() ? 1 : usuarios.get(usuarios.size() - 1).getId() + 1;
+        usuario.setId(id);
     }
 
     //Deleta um cadastro.
     public boolean delete(int id) {
-        boolean find = false;
         for (int i = 0; i < usuarios.size(); i++) {
             if (id == usuarios.get(i).getId()) {
-                find = true;
                 usuarios.remove(i);
-                break;
+                return true;
             }
         }
-        return find;
+        return false;
     }
 
     //Retorna um id de cadastro da lista.
@@ -62,15 +50,13 @@ public class UsuarioService {
     }
 
     public void update(Usuario usuario) {
-        int id = usuario.getId();
-        Usuario usuarioEncontrado = retornaUsuario(id);
+        Usuario usuarioEncontrado = retornaUsuario(usuario.getId());
         if (usuario.getNome().isEmpty()) usuario.setNome(usuarioEncontrado.getNome());
         if (usuario.getCpf().isEmpty()) usuario.setCpf(usuarioEncontrado.getCpf());
         if (usuario.getEmail().isEmpty()) usuario.setEmail(usuarioEncontrado.getEmail());
         if (usuario.getDataNascimento() == null) usuario.setDataNascimento(usuarioEncontrado.getDataNascimento());
         if (usuario.getSexo() == null) usuario.setSexo(usuarioEncontrado.getSexo());
-        id--;
-        usuarios.set(id, usuario);
+        usuarios.set(usuario.getId() -1, usuario);
     }
 
 }

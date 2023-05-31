@@ -14,9 +14,6 @@ public class Usuario {
     private LocalDate dataNascimento;
     private Sexo sexo;
 
-    public Usuario() {
-    }
-
     public Usuario(String nome, String cpf, String email, LocalDate dataNascimento, Sexo sexo) {
         this.nome = nome;
         this.cpf = cpf;
@@ -25,14 +22,14 @@ public class Usuario {
         this.sexo = sexo;
     }
 
-    public Usuario(int id, String nome, String cpf, String email, LocalDate dataNascimento, Sexo sexo) {
+    /*public Usuario(int id, String nome, String cpf, String email, LocalDate dataNascimento, Sexo sexo) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
-    }
+    }*/
 
 
     public int getId() {
@@ -71,27 +68,26 @@ public class Usuario {
         return this.dataNascimento;
     }
 
-    public LocalDate setDataNascimento(LocalDate dataNascimento) {
-        return this.dataNascimento = dataNascimento;
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public Sexo getSexo() {
         return this.sexo;
     }
 
-    public Sexo setSexo(Sexo sexo) {
+    public void setSexo(Sexo sexo) {
         this.sexo = sexo;
-        return sexo;
     }
 
-    public boolean campoNulo(Object campo) {
+    /*public boolean campoNulo(Object campo) {
         if (campo == null) {
             return true;
         } else if (campo instanceof String) {
             return ((String) campo).isEmpty();
         }
         return false;
-    }
+    }*/
 
     @Override
     public String toString() {
