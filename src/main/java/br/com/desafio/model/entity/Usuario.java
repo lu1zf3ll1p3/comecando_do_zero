@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public class Usuario {
 
-    private Integer id;
+    private int id;
     private String nome;
     private String cpf;
     private String email;
@@ -22,18 +22,16 @@ public class Usuario {
         this.sexo = sexo;
     }
 
-    /*public Usuario(int id, String nome, String cpf, String email, LocalDate dataNascimento, Sexo sexo) {
+    public Usuario(int id, String nome, String cpf, String email, LocalDate dataNascimento, Sexo sexo) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
-    }*/
-
-
+    }
     public int getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(int id) {
@@ -41,7 +39,7 @@ public class Usuario {
     }
 
     public String getNome() {
-        return this.nome;
+        return nome;
     }
 
     public void setNome(String nome) {
@@ -49,7 +47,7 @@ public class Usuario {
     }
 
     public String getCpf() {
-        return this.cpf;
+        return cpf;
     }
 
     public void setCpf(String cpf) {
@@ -57,7 +55,7 @@ public class Usuario {
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public void setEmail(String email) {
@@ -65,7 +63,7 @@ public class Usuario {
     }
 
     public LocalDate getDataNascimento() {
-        return this.dataNascimento;
+        return dataNascimento;
     }
 
     public void setDataNascimento(LocalDate dataNascimento) {
@@ -73,14 +71,15 @@ public class Usuario {
     }
 
     public Sexo getSexo() {
-        return this.sexo;
+        return sexo;
     }
 
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
 
-    /*public boolean campoNulo(Object campo) {
+
+   /*public boolean campoNulo(Object campo) {
         if (campo == null) {
             return true;
         } else if (campo instanceof String) {

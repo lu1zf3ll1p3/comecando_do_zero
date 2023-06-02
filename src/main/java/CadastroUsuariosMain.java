@@ -30,9 +30,7 @@ public class CadastroUsuariosMain {
                         scanner.nextLine();
                         Usuario usuarioEncontrado = service.retornaUsuario(id);
                         System.out.println(usuarioEncontrado.toString());
-                        Usuario usuarioAtualizado = usuario();
-                        usuarioAtualizado.setId(id);
-                        service.update(usuarioAtualizado);
+                        service.update(id, usuario());
                     } catch (Exception idNaoEncontrado) {
                         System.out.println("O ID informado não foi encontrado! ");
                     }
@@ -72,14 +70,11 @@ public class CadastroUsuariosMain {
         System.out.print("Insira seu email: ");
         String email = scanner.nextLine();
         System.out.print("Insira sua data de nascimento [dd/MM/aaaa]: ");
-        LocalDate dataNascimento = null;
-        try {
-            dataNascimento = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        } catch (DateTimeException dataVazia) {
-            System.out.println("data sem informação !");
-        }
+        String entradaDataNascimento = scanner.nextLine();
+        LocalDate dataNascimento = entradaDataNascimento.isEmpty() ? null : LocalDate.parse(entradaDataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         System.out.print("Insira seu sexo [F/M]: ");
-        Sexo sexo = scanner.nextLine().equalsIgnoreCase("f") ? Sexo.FEMININO : Sexo.MASCULINO;
+        String escolhaSexo = scanner.nextLine();
+        Sexo sexo = escolhaSexo.isEmpty() ? null : escolhaSexo.equalsIgnoreCase("f") ? Sexo.FEMININO : Sexo.MASCULINO;
         return new Usuario(nome, cpf, email, dataNascimento, sexo);
     }
 
