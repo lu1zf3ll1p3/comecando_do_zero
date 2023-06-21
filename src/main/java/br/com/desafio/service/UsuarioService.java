@@ -60,11 +60,20 @@ public class UsuarioService {
 
     public void update(int id, Usuario usuario) {
         Usuario usuarioEncontrado = retornaUsuario(id);
-        if (!usuario.getNome().isEmpty()) usuarioEncontrado.setNome(usuario.getNome());
-        if (!usuario.getCpf().isEmpty()) usuarioEncontrado.setCpf(usuario.getCpf());
-        if (!usuario.getEmail().isEmpty()) usuarioEncontrado.setEmail(usuario.getEmail());
-        if (usuario.getDataNascimento() != null) usuarioEncontrado.setDataNascimento(usuario.getDataNascimento());
-        if (usuario.getSexo() != null) usuarioEncontrado.setSexo(usuario.getSexo());
+        if (!verificaCampoNulo(usuario.getNome())) usuarioEncontrado.setNome(usuario.getNome());
+        if (!verificaCampoNulo(usuario.getCpf())) usuarioEncontrado.setCpf(usuario.getCpf());
+        if (!verificaCampoNulo(usuario.getEmail())) usuarioEncontrado.setEmail(usuario.getEmail());
+        if (!verificaCampoNulo(usuario.getDataNascimento())) usuarioEncontrado.setDataNascimento(usuario.getDataNascimento());
+        if (!verificaCampoNulo(usuario.getSexo())) usuarioEncontrado.setSexo(usuario.getSexo());
+    }
+
+    public boolean verificaCampoNulo(Object campo) {
+        if (campo == null) {
+            return true;
+        } else if (campo instanceof String) {
+            return ((String) campo).isEmpty();
+        }
+        return false;
     }
 
 }

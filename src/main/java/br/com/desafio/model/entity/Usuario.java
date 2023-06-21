@@ -79,15 +79,6 @@ public class Usuario {
     }
 
 
-   /*public boolean campoNulo(Object campo) {
-        if (campo == null) {
-            return true;
-        } else if (campo instanceof String) {
-            return ((String) campo).isEmpty();
-        }
-        return false;
-    }*/
-
     @Override
     public String toString() {
         return "Usuario{" +

@@ -70,10 +70,10 @@ public class CadastroUsuariosMain {
         String email = scanner.nextLine();
         System.out.print("Insira sua data de nascimento [dd/MM/aaaa]: ");
         String entradaDataNascimento = scanner.nextLine();
-        LocalDate dataNascimento = entradaDataNascimento.isEmpty() ? null : LocalDate.parse(entradaDataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate dataNascimento = service.verificaCampoNulo(entradaDataNascimento) ? null : LocalDate.parse(entradaDataNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         System.out.print("Insira seu sexo [F/M]: ");
         String escolhaSexo = scanner.nextLine();
-        Sexo sexo = escolhaSexo.isEmpty() ? null : escolhaSexo.equalsIgnoreCase("f") ? Sexo.FEMININO : Sexo.MASCULINO;
+        Sexo sexo = service.verificaCampoNulo(escolhaSexo) ? null : escolhaSexo.equalsIgnoreCase("f") ? Sexo.FEMININO : Sexo.MASCULINO;
         return new Usuario(nome, cpf, email, dataNascimento, sexo);
     }
 
