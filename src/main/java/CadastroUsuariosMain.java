@@ -2,7 +2,6 @@ import br.com.desafio.model.entity.Usuario;
 import br.com.desafio.model.enums.Sexo;
 import br.com.desafio.service.UsuarioService;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
