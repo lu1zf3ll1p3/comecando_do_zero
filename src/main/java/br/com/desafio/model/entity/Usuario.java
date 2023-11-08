@@ -14,6 +14,9 @@ public class Usuario {
     private LocalDate dataNascimento;
     private Sexo sexo;
 
+    public Usuario() {
+    }
+
     public Usuario(String nome, String cpf, String email, LocalDate dataNascimento, Sexo sexo) {
         this.nome = nome;
         this.cpf = cpf;
@@ -30,6 +33,7 @@ public class Usuario {
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
     }
+
     public int getId() {
         return id;
     }

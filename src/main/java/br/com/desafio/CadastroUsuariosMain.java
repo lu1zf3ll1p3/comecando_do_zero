@@ -1,3 +1,5 @@
+package br.com.desafio;
+
 import br.com.desafio.model.entity.Usuario;
 import br.com.desafio.model.enums.Sexo;
 import br.com.desafio.service.UsuarioService;
@@ -17,42 +19,38 @@ public class CadastroUsuariosMain {
         while (continua.equals("S")) {
             System.out.println("#####################Sistema de Cadastro de Usuários#####################");
             System.out.print("Selecione a opção para continuar: \n[1]Cadastrar um novo usuário  \n[2]Atualizar um usuário existente " +
-                    "\n[3]Deletar um usuário existente \n[4]Listar usuários da lista \n[5]Sair \nSelecione: ");
-            int escolha = scanner.nextInt();
-            scanner.nextLine();
-            switch (escolha) {
+                    "\n[3]Deletar um usuário existente \n[4]Listar usuários da lista \n[5]Listar um usuário \n[6]Sair \nSelecione: ");
+            switch (scanner.nextInt()) {
                 case 1 -> service.save(usuario());
                 case 2 -> {
                     try {
                         System.out.println("Digite o id a ser atualizado: ");
-                        int id = scanner.nextInt();
-                        scanner.nextLine();
-                        Usuario usuarioEncontrado = service.retornaUsuario(id);
-                        System.out.println(usuarioEncontrado.toString());
-                        service.update(id, usuario());
-                    } catch (Exception idNaoEncontrado) {
+                        Usuario usuarioEncontrado = service.findOne(scanner.nextInt());
+                        service.update(usuarioEncontrado.getId(), usuario());
+                    } catch (RuntimeException idNaoEncontrado) {
                         System.out.println("O ID informado não foi encontrado! ");
                     }
                 }
                 case 3 -> {
                     //Realiza a Exclusão de algum cadastro dentro da lista.
                     System.out.println("Qual ID você deseja deletar: ");
-                    int deletarId = scanner.nextInt();
-                    boolean deletado = service.delete(deletarId);
+                    boolean deletado = service.delete(scanner.nextInt());
                     if (deletado) {
-                        System.out.println("O ID Selecionado: " + deletarId + " foi exluido com sucesso.");
-                    } else {
-                        System.out.println("Esse ID: " + deletarId + " não pode ser excluido ou não existe !!!");
+                        System.out.println("O ID Selecionado foi exluido com sucesso.");
                     }
                 }
                 case 4 -> {
-                    //Busca os cadastros da lista.
-                    List<Usuario> usuariosList = service.findAll();
-                    for (Usuario usuarios : usuariosList) {
-                        System.out.println(usuarios.toString());
-                    }
+                    service.findAll().forEach(usuarios -> System.out.println(usuarios.toString()));
                 }
                 case 5 -> {
+                    try {
+                        System.out.print("Selecione o ID correspondente ao usuario desejado: ");
+                        System.out.println(service.findOne(scanner.nextInt()));
+                    } catch (RuntimeException idNaoExistente) {
+                        System.out.println("ID não encontrado !");
+                    }
+                }
+                case 6 -> {
                     continua = "N";
                     System.err.println("Fim do Programa !!!");
                 }
@@ -62,6 +60,7 @@ public class CadastroUsuariosMain {
     }
 
     public static Usuario usuario() {
+        scanner.nextLine();
         System.out.print("Insira seu nome: ");
         String nome = scanner.nextLine();
         System.out.print("Insira seu cpf: ");

@@ -20,7 +20,6 @@ class UsuarioServiceTest {
         usuarioService.save(usuario);
         Usuario usuarioEncontrado = usuarioService.retornaUsuario(1);
         Assertions.assertEquals(usuario, usuarioEncontrado);
-
     }
 
     @Test
@@ -45,7 +44,7 @@ class UsuarioServiceTest {
     @Test
     public void deveAtualizarUmUsuario() {
         usuarioService.save(usuario);
-        Usuario usuario1 = new Usuario(1, "LuizF", "054", "l.com", LocalDate.parse("19/02/1994", DateTimeFormatter.ofPattern("dd/MM/yyyy")), Sexo.MASCULINO);
+        Usuario usuario1 = new Usuario(1, "LuizF", "054", "l.com", LocalDate.parse("19/02/1993", DateTimeFormatter.ofPattern("dd/MM/yyyy")), Sexo.MASCULINO);
         usuarioService.update(1, usuario1);
         Usuario usuarioAtualizado = usuarioService.retornaUsuario(1);
         Assertions.assertEquals(usuario, usuarioAtualizado);

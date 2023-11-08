@@ -9,19 +9,6 @@ public class UsuarioService {
 
     private List<Usuario> usuarios;
 
-    //Cria uma nova lista de cadastros.
-    public void save(Usuario usuario) {
-        if (usuarios == null) {
-            usuarios = new ArrayList<>();
-        }
-        setarId(usuario);
-        usuarios.add(usuario);
-    }
-
-    public List<Usuario> findAll() {
-        return this.usuarios;
-    }
-
     //Gera um novo id para cada cadastro.
     private void setarId(Usuario usuario) {
         int id = 0;
@@ -37,33 +24,44 @@ public class UsuarioService {
         }
     }
 
+    //Cria uma nova lista de cadastros.
+    public void save(Usuario usuario) {
+        if (usuarios == null) {
+            usuarios = new ArrayList<>();
+        }
+        setarId(usuario);
+        usuarios.add(usuario);
+    }
+
+    //busca todos os Usuarios da Lista
+    public List<Usuario> findAll() {
+        return this.usuarios;
+    }
+
     //Deleta um cadastro.
     public boolean delete(int id) {
-        for (Usuario usuario : usuarios) {
-            if (id == usuario.getId()) {
-                usuarios.remove(usuario);
-                return true;
-            }
+        try {
+            return usuarios.remove(usuarios.stream().filter(usuario -> id == usuario.getId()).findFirst().orElseThrow());
+        } catch (NullPointerException erroDeletarId) {
+            System.out.println("Esse ID: " + id + " não pode ser excluido ou não existe !!!");
         }
         return false;
     }
 
-    //Retorna um id de cadastro da lista.
-    public Usuario retornaUsuario(int id) {
-        for (Usuario usuario : usuarios) {
-            if (id == usuario.getId()) {
-                return usuario;
-            }
-        }
-        return null;
+    //Retorna um usuario de cadastro da lista.
+    public Usuario findOne(int id) {
+        return usuarios.stream().filter(usuario -> id == usuario.getId()).findFirst().orElseThrow();
     }
 
+    //Atualiza o usuario selecionado da lista
     public void update(int id, Usuario usuario) {
-        Usuario usuarioEncontrado = retornaUsuario(id);
+        Usuario usuarioEncontrado = findOne(id);
+        System.out.println(usuarioEncontrado.toString());
         if (!verificaCampoNulo(usuario.getNome())) usuarioEncontrado.setNome(usuario.getNome());
         if (!verificaCampoNulo(usuario.getCpf())) usuarioEncontrado.setCpf(usuario.getCpf());
         if (!verificaCampoNulo(usuario.getEmail())) usuarioEncontrado.setEmail(usuario.getEmail());
-        if (!verificaCampoNulo(usuario.getDataNascimento())) usuarioEncontrado.setDataNascimento(usuario.getDataNascimento());
+        if (!verificaCampoNulo(usuario.getDataNascimento()))
+            usuarioEncontrado.setDataNascimento(usuario.getDataNascimento());
         if (!verificaCampoNulo(usuario.getSexo())) usuarioEncontrado.setSexo(usuario.getSexo());
     }
 
@@ -71,7 +69,7 @@ public class UsuarioService {
         if (campo == null) {
             return true;
         } else if (campo instanceof String) {
-            return ((String) campo).isEmpty();
+            return ((String) campo).isEmpty() || ((String) campo).isBlank();
         }
         return false;
     }
